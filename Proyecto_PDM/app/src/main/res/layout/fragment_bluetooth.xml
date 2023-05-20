@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/nullGap"
             android:layout_marginStart="@dimen/marginStartBtn"
-            android:layout_marginBottom="120dp"
+            android:layout_marginBottom="@dimen/marginBottomBtnBack"
             android:background="@color/btnColor"
             android:clickable="true"
             android:contentDescription="@string/actionMoveToBluetooth"

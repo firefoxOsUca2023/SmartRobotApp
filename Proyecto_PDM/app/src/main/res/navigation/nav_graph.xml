@@ -14,8 +14,8 @@
             android:id="@+id/action_welcomeFragment_to_bluetoothFragment"
             app:destination="@id/bluetoothFragment" />
         <action
-            android:id="@+id/action_welcomeFragment_to_controllersActivity"
-            app:destination="@id/controllersActivity" />
+            android:id="@+id/action_welcomeFragment_to_controllersFragment2"
+            app:destination="@id/controllersFragment2" />
     </fragment>
     <fragment
         android:id="@+id/bluetoothFragment"
@@ -25,10 +25,20 @@
         <action
             android:id="@+id/action_bluetoothFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_bluetoothFragment_to_controllersFragment2"
+            app:destination="@id/controllersFragment2" />
     </fragment>
-    <activity
-        android:id="@+id/controllersActivity"
-        android:name="com.example.zacatales.smartrobotapp.controllersActivity"
-        android:label="activity_controllers"
-        tools:layout="@layout/activity_controllers" />
+    <fragment
+        android:id="@+id/controllersFragment2"
+        android:name="com.example.zacatales.smartrobotapp.ControllersFragment"
+        android:label="fragment_controllers"
+        tools:layout="@layout/fragment_controllers" >
+        <action
+            android:id="@+id/action_controllersFragment2_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_controllersFragment2_to_bluetoothFragment"
+            app:destination="@id/bluetoothFragment" />
+    </fragment>
 </navigation>

@@ -1,6 +1,7 @@
 package com.example.zacatales.smartrobotapp
 
 import android.app.Activity
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.ProxyFileDescriptorCallback
@@ -43,7 +44,10 @@ class WelcomeFragment : Fragment() {
             it.findNavController().navigate(R.id.action_welcomeFragment_to_bluetoothFragment)
         }
         btnToControllers.setOnClickListener {
-            it.findNavController().navigate(R.id.action_welcomeFragment_to_controllersActivity)
+            activity?.apply {
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                it.findNavController().navigate(R.id.action_welcomeFragment_to_controllersFragment2)
+            }
         }
     }
 

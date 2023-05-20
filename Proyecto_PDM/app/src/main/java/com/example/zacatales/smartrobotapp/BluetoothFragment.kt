@@ -1,5 +1,6 @@
 package com.example.zacatales.smartrobotapp
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ class BluetoothFragment : Fragment() {
 
     private lateinit var btnToControllers: FloatingActionButton
     private lateinit var btnToWelcome: FloatingActionButton
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +29,14 @@ class BluetoothFragment : Fragment() {
         bin()
         btnToWelcome.setOnClickListener{
             it.findNavController().navigate(R.id.action_bluetoothFragment_to_welcomeFragment)
+        }
+        btnToControllers.setOnClickListener {
+            activity?.apply {
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                it.findNavController().navigate(R.id.action_bluetoothFragment_to_controllersFragment2)
+
+            }
+
         }
     }
 
