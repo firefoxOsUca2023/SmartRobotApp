@@ -23,6 +23,7 @@ class ControllersFragment : Fragment() {
 
     private lateinit var btnToBack: FloatingActionButton
     private lateinit var btnToBluetooth: FloatingActionButton
+    private lateinit var btnToRoute: FloatingActionButton
 
 
 
@@ -65,6 +66,14 @@ class ControllersFragment : Fragment() {
                 it.findNavController().navigate(R.id.action_controllersFragment2_to_bluetoothFragment)
             }
         }
+        btnToRoute.setOnClickListener {
+            activity?.apply {
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                it.findNavController().navigate(R.id.action_controllersFragment2_to_routeFragment)
+            }
+        }
+
+
 
         /*requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
@@ -83,6 +92,7 @@ class ControllersFragment : Fragment() {
     fun bin(){
         btnToBack = view?.findViewById(R.id.action_to_previus_controllerFragment) as FloatingActionButton
         btnToBluetooth = view?.findViewById(R.id.action_to_bluetooth_ControllerFragment) as FloatingActionButton
+        btnToRoute = view?.findViewById(R.id.route_actionButton) as FloatingActionButton
     }
 
 
