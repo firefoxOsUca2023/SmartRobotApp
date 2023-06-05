@@ -6,22 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".RouteFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardPublicity"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/cardHeight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textCardPublicity"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="@string/textEjem" />
-    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/action_to_previus_routeFragment"
@@ -66,7 +51,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewNameAppController"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardPublicity" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewNameAppController"

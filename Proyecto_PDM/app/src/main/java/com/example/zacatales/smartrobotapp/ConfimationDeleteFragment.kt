@@ -17,6 +17,9 @@ class ConfimationDeleteFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity?.apply {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        }
     }
 
     override fun onCreateView(
@@ -31,13 +34,13 @@ class ConfimationDeleteFragment : Fragment() {
          bind()
          btnDelete.setOnClickListener {
              activity?.apply {
-                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                 //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                  it.findNavController().navigate(R.id.action_confimationDeleteFragment_to_routeFragment)
              }
          }
          btnNotDelete.setOnClickListener {
              activity?.apply {
-                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                 //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                  it.findNavController().navigate(R.id.action_confimationDeleteFragment_to_routeFragment)
              }
          }

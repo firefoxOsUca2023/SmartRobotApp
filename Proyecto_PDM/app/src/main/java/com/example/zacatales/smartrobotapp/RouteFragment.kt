@@ -15,12 +15,16 @@ class RouteFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.apply {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        }
         return inflater.inflate(R.layout.fragment_route, container, false)
     }
 
@@ -29,13 +33,15 @@ class RouteFragment : Fragment() {
         bind()
         btnToBack.setOnClickListener {
             activity?.apply {
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-                it.findNavController().navigate(R.id.action_routeFragment_to_controllersFragment2)
+                //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                activity?.apply {
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }
             }
         }
         btnToDelete.setOnClickListener {
             activity?.apply {
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 it.findNavController().navigate(R.id.action_routeFragment_to_confimationDeleteFragment)
             }
         }

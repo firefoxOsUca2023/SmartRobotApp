@@ -20,7 +20,8 @@ class WelcomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        resources.configuration.orientation = Configuration.ORIENTATION_LANDSCAPE
+
+
         //FOR THE APP CLOSE ALONE IN MAIN FRAGMENT
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -34,6 +35,9 @@ class WelcomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        activity?.apply {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
         return inflater.inflate(R.layout.fragment_welcome, container, false)
     }
 
@@ -45,7 +49,7 @@ class WelcomeFragment : Fragment() {
         }
         btnToControllers.setOnClickListener {
             activity?.apply {
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 it.findNavController().navigate(R.id.action_welcomeFragment_to_controllersFragment2)
             }
         }

@@ -1,22 +1,14 @@
 package com.example.zacatales.smartrobotapp
 
-import android.app.Activity
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.navigation.Navigation
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
 
 
 class ControllersFragment : Fragment() {
@@ -29,7 +21,10 @@ class ControllersFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        //resources.configuration.orientation = Configuration.ORIENTATION_LANDSCAPE
+        activity?.apply {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        }
     }
 
 
@@ -46,6 +41,9 @@ class ControllersFragment : Fragment() {
         }
         requireActivity().onBackPressedDispatcher.addCallback(callback)*/
         // Inflate the layout for this fragment
+        activity?.apply {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        }
         return inflater.inflate(R.layout.fragment_controllers, container, false)
     }
 
@@ -53,22 +51,20 @@ class ControllersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bin()
+        //    int orientation = yourActivityName.this.getResources().getConfiguration().orientation;
         btnToBack.setOnClickListener {
             activity?.apply {
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                 activity?.onBackPressedDispatcher?.onBackPressed()
             }
         }
         btnToBluetooth.setOnClickListener {
 
             activity?.apply {
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
                 it.findNavController().navigate(R.id.action_controllersFragment2_to_bluetoothFragment)
             }
         }
         btnToRoute.setOnClickListener {
             activity?.apply {
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 it.findNavController().navigate(R.id.action_controllersFragment2_to_routeFragment)
             }
         }

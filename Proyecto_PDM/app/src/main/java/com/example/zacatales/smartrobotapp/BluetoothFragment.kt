@@ -15,11 +15,18 @@ class BluetoothFragment : Fragment() {
     private lateinit var btnToWelcome: FloatingActionButton
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        activity?.apply {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
         return inflater.inflate(R.layout.fragment_bluetooth, container, false)
     }
 
@@ -28,15 +35,15 @@ class BluetoothFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bin()
         btnToWelcome.setOnClickListener{
-            it.findNavController().navigate(R.id.action_bluetoothFragment_to_welcomeFragment)
+            activity?.apply {
+                activity?.onBackPressedDispatcher?.onBackPressed()
+            }
         }
         btnToControllers.setOnClickListener {
             activity?.apply {
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 it.findNavController().navigate(R.id.action_bluetoothFragment_to_controllersFragment2)
-
             }
-
         }
     }
 
