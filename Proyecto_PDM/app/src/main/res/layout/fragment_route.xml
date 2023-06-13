@@ -7,13 +7,12 @@
     tools:context=".RouteFragment">
 
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/action_to_previus_routeFragment"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/nullGap"
-        android:layout_marginStart="@dimen/marginStart_ControllerFragmetn"
-        android:layout_marginBottom="@dimen/marginBottom_ControllerFragment"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="40dp"
         android:background="@color/btnColor"
         android:clickable="true"
         android:contentDescription="Back to controller"
@@ -28,8 +27,8 @@
         android:id="@+id/action_deleteRoute"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/nullGap"
-        android:layout_marginEnd="@dimen/marginEnd_ControllerFragment"
-        android:layout_marginBottom="@dimen/marginBottom_ControllerFragment"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="40dp"
         android:background="@color/btnColor"
         android:clickable="true"
         android:contentDescription="Delete route"
@@ -38,7 +37,7 @@
         app:backgroundTint="@color/btnColor"
         app:borderWidth="@dimen/borderWidthBtn"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textViewEmptyRoute"
