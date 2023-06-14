@@ -8,5 +8,7 @@
     <string name="actionMoveToBluetooth">Add movie</string>
     <string name="NameApp">Smart Robot App</string>
     <string name="textTitleBluetooth">Lista de dispositivos</string>
+    <string name="name_bluetoothDevice"></string>
+    <string name="status_device" />
 
 </resources>

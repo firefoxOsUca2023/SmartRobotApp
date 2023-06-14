@@ -1,5 +1,7 @@
 package com.example.zacatales.smartrobotapp
 
+import android.bluetooth.BluetoothManager
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import com.example.zacatales.smartrobotapp.databinding.FragmentBluetoothBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.security.Provider.Service
 
 class BluetoothFragment : Fragment() {
 
     private lateinit var btnToControllers: FloatingActionButton
     private lateinit var btnToWelcome: FloatingActionButton
+    private lateinit var binding: FragmentBluetoothBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,19 +32,19 @@ class BluetoothFragment : Fragment() {
         activity?.apply {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
-        return inflater.inflate(R.layout.fragment_bluetooth, container, false)
+        binding=FragmentBluetoothBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bin()
-        btnToWelcome.setOnClickListener{
+        binding.actionToPrevius.setOnClickListener{
             activity?.apply {
                 activity?.onBackPressedDispatcher?.onBackPressed()
             }
         }
-        btnToControllers.setOnClickListener {
+        binding.actionToControllers.setOnClickListener {
             activity?.apply {
                 //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 it.findNavController().navigate(R.id.action_bluetoothFragment_to_controllersFragment2)
@@ -47,8 +52,9 @@ class BluetoothFragment : Fragment() {
         }
     }
 
-    fun bin(){
-        btnToWelcome = view?.findViewById(R.id.action_to_previus) as FloatingActionButton
-        btnToControllers = view?.findViewById(R.id.action_to_controllers) as FloatingActionButton
+    fun scan(view: View){
+        val mb=((Context.BLUETOOTH_SERVICE) as BluetoothManager).adapter
     }
+
+
 }

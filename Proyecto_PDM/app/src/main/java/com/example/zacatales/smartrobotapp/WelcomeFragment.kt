@@ -1,6 +1,9 @@
 package com.example.zacatales.smartrobotapp
 
 import android.app.Activity
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothManager
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
@@ -11,12 +14,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.findNavController
+import com.example.zacatales.smartrobotapp.databinding.FragmentWelcomeBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WelcomeFragment : Fragment() {
 
     private lateinit var btnToControllers: FloatingActionButton
     private lateinit var btnToBluetooth: FloatingActionButton
+    private lateinit var binding: FragmentWelcomeBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,16 +44,22 @@ class WelcomeFragment : Fragment() {
         activity?.apply {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+        binding = FragmentWelcomeBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bin()
-        btnToBluetooth.setOnClickListener{
+        val bluetoothadapter:BluetoothAdapter
+        bluetoothadapter= BluetoothAdapter.getDefaultAdapter()
+        binding.actionToBluetooth.setOnClickListener{
+            val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            startActivityForResult(intent,1)
             it.findNavController().navigate(R.id.action_welcomeFragment_to_bluetoothFragment)
+
+
         }
-        btnToControllers.setOnClickListener {
+        binding.actionToControllers.setOnClickListener {
             activity?.apply {
                 //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 it.findNavController().navigate(R.id.action_welcomeFragment_to_controllersFragment2)
@@ -55,8 +67,5 @@ class WelcomeFragment : Fragment() {
         }
     }
 
-    fun bin(){
-        btnToBluetooth = view?.findViewById(R.id.action_to_bluetooth) as FloatingActionButton
-        btnToControllers = view?.findViewById(R.id.action_to_controllers) as FloatingActionButton
-    }
+
 }
