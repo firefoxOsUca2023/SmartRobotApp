@@ -4,5 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="btnColor">#FF2E63</color>
     <color name="txtColor">#010A43</color>
+    <color name="CardDevice">#B9F6F7FA</color>
+
 
 </resources>
