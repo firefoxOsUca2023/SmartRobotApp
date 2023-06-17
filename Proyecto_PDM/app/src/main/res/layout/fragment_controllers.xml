@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    tools:context=".ControllersFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/startup_actionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/nullGap"
+            android:layout_marginTop="75dp"
+            android:background="@color/btnColor"
+            android:clickable="true"
+            android:contentDescription="Power on the car"
+            android:src="@drawable/baseline_power"
+            app:background="@color/txtColor"
+            app:backgroundTint="@color/white"
+            app:borderWidth="@dimen/borderWidthBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.499"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/horn_actionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/nullGap"
+            android:layout_marginTop="25dp"
+            android:background="@color/btnColor"
+            android:clickable="true"
+            android:contentDescription="sonar la bocina"
+            android:src="@drawable/baseline_campaign_24"
+            app:background="@color/txtColor"
+            app:backgroundTint="@color/white"
+            app:borderWidth="@dimen/borderWidthBtn"
+            app:layout_constraintEnd_toEndOf="@+id/startup_actionButton"
+            app:layout_constraintStart_toStartOf="@+id/startup_actionButton"
+            app:layout_constraintTop_toBottomOf="@+id/startup_actionButton" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/lights_actionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/nullGap"
+            android:layout_marginTop="25dp"
+            android:background="@color/btnColor"
+            android:clickable="true"
+            android:contentDescription="Turn on the lights"
+            android:src="@drawable/baseline_highlight"
+            app:background="@color/txtColor"
+            app:backgroundTint="@color/white"
+            app:borderWidth="@dimen/borderWidthBtn"
+            app:layout_constraintEnd_toEndOf="@+id/horn_actionButton"
+            app:layout_constraintStart_toStartOf="@+id/horn_actionButton"
+            app:layout_constraintTop_toBottomOf="@+id/horn_actionButton" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/up_actionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginStart="125dp"
+            android:background="@color/btnColor"
+            android:clickable="true"
+            android:contentDescription="Go forward"
+            android:src="@drawable/baseline_arrow_up_24"
+            app:background="@color/txtColor"
+            app:backgroundTint="@color/white"
+            app:borderWidth="@dimen/borderWidthBtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.491" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/left_actionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="140dp"
+            android:background="@color/btnColor"
+            android:clickable="true"
+            android:contentDescription="Turn to the left"
+            android:src="@drawable/baseline_arrow_left_24"
+            app:background="@color/txtColor"
+            app:backgroundTint="@color/white"
+            app:borderWidth="@dimen/borderWidthBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/right_actionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="181dp"
+            android:layout_marginTop="140dp"
+            android:background="@color/btnColor"
+            android:clickable="true"
+            android:contentDescription="Turn to the right"
+            android:src="@drawable/baseline_arrow_right_24"
+            app:background="@color/txtColor"
+            app:backgroundTint="@color/white"
+            app:borderWidth="@dimen/borderWidthBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/back_actionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="200dp"
+            android:background="@color/btnColor"
+            android:clickable="true"
+            android:contentDescription="Turn back"
+            android:src="@drawable/outline_arrow_down_24"
+            app:background="@color/txtColor"
+            app:backgroundTint="@color/white"
+            app:borderWidth="@dimen/borderWidthBtn"
+            app:layout_constraintEnd_toEndOf="@+id/up_actionButton"
+            app:layout_constraintStart_toStartOf="@+id/up_actionButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/route_actionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/btnColor"
+            android:clickable="true"
+            android:contentDescription="Watch route"
+            android:src="@drawable/outline_map_24"
+            app:background="@color/txtColor"
+            app:backgroundTint="@color/white"
+            app:borderWidth="@dimen/borderWidthBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.517"
+            app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
+            app:layout_constraintTop_toBottomOf="@+id/textViewInfoVelocity" />
+
+        1<com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/action_to_previus_controllerFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/nullGap"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/btnColor"
+        android:clickable="true"
+        android:contentDescription="@string/actionMoveToBluetooth"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:background="@color/txtColor"
+        app:backgroundTint="@color/btnColor"
+        app:borderWidth="@dimen/borderWidthBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+        2 <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/action_to_bluetooth_ControllerFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/nullGap"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="40dp"
+        android:background="@color/btnColor"
+        android:clickable="true"
+        android:contentDescription="@string/actionMoveToBluetooth"
+        android:src="@android:drawable/stat_sys_data_bluetooth"
+        app:background="@color/txtColor"
+        app:backgroundTint="@color/btnColor"
+        app:borderWidth="@dimen/borderWidthBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewNameAppController"
+            android:layout_width="@dimen/nullGap"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginsGapAppName"
+            android:layout_marginEnd="@dimen/marginsGapAppName"
+            android:layout_marginBottom="@dimen/maxGap"
+            android:gravity="center"
+            android:text="@string/NameApp"
+            android:textColor="@color/txtColor"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewVelocity"
+            android:layout_width="@dimen/nullGap"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:gravity="center"
+            android:text="Velocidad Baja"
+            android:textColor="@color/txtColor"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/startup_actionButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewInfoVelocity"
+            android:layout_width="@dimen/nullGap"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="Ajusta la velocidad del carrito"
+            android:textColor="@color/txtColor"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="219dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="156dp"
+            android:thumbTint="#FFDFDF"
+            android:progressTint="#FFDFDF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
