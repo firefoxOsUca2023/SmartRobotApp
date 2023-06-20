@@ -1,7 +1,9 @@
 package com.example.zacatales.smartrobotapp
 
 import android.content.pm.ActivityInfo
+import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,10 @@ class ControllersFragment : Fragment() {
     private lateinit var btnToBack: FloatingActionButton
     private lateinit var btnToBluetooth: FloatingActionButton
     private lateinit var btnToRoute: FloatingActionButton
+    private lateinit var lightsActionBtn: FloatingActionButton
+    private lateinit var hornActionBtn: FloatingActionButton
+    private var isButtonPressed = false
+    private var isButtonPressed2 = false
 
 
 
@@ -69,6 +75,26 @@ class ControllersFragment : Fragment() {
             }
         }
 
+        lightsActionBtn.setOnClickListener{
+            isButtonPressed = !isButtonPressed // Cambia el estado del botón
+
+            if (isButtonPressed) {
+                lightsActionBtn.backgroundTintList = ColorStateList.valueOf(Color.YELLOW) // Cambia el color cuando el botón está presionado
+            } else {
+                lightsActionBtn.backgroundTintList= ColorStateList.valueOf(Color.WHITE) // Cambia el color cuando el botón no está presionado
+            }
+        }
+
+        hornActionBtn.setOnClickListener{
+            isButtonPressed2 = !isButtonPressed2 // Cambia el estado del botón
+
+            if (isButtonPressed2) {
+                hornActionBtn.backgroundTintList = ColorStateList.valueOf(Color.YELLOW) // Cambia el color cuando el botón está presionado
+            } else {
+                hornActionBtn.backgroundTintList= ColorStateList.valueOf(Color.WHITE) // Cambia el color cuando el botón no está presionado
+            }
+        }
+
 
 
         /*requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
@@ -84,11 +110,12 @@ class ControllersFragment : Fragment() {
     }
 
 
-
     fun bin(){
         btnToBack = view?.findViewById(R.id.action_to_previus_controllerFragment) as FloatingActionButton
         btnToBluetooth = view?.findViewById(R.id.action_to_bluetooth_ControllerFragment) as FloatingActionButton
         btnToRoute = view?.findViewById(R.id.route_actionButton) as FloatingActionButton
+        lightsActionBtn = view?.findViewById(R.id.lights_actionButton) as FloatingActionButton
+        hornActionBtn = view?.findViewById(R.id.horn_actionButton) as FloatingActionButton
     }
 
 

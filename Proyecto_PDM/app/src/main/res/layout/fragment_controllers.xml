@@ -9,54 +9,31 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/startup_actionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/nullGap"
-            android:layout_marginTop="75dp"
-            android:background="@color/btnColor"
-            android:clickable="true"
-            android:contentDescription="Power on the car"
-            android:src="@drawable/baseline_power"
-            app:background="@color/txtColor"
-            app:backgroundTint="@color/white"
-            app:borderWidth="@dimen/borderWidthBtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.499"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/horn_actionButton"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/nullGap"
-            android:layout_marginTop="25dp"
-            android:background="@color/btnColor"
+            android:layout_marginTop="100dp"
             android:clickable="true"
             android:contentDescription="sonar la bocina"
-            android:src="@drawable/baseline_campaign_24"
-            app:background="@color/txtColor"
             app:backgroundTint="@color/white"
+            android:src="@drawable/baseline_campaign_24"
             app:borderWidth="@dimen/borderWidthBtn"
-            app:layout_constraintEnd_toEndOf="@+id/startup_actionButton"
-            app:layout_constraintStart_toStartOf="@+id/startup_actionButton"
-            app:layout_constraintTop_toBottomOf="@+id/startup_actionButton" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/lights_actionButton"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/nullGap"
             android:layout_marginTop="25dp"
-            android:background="@color/btnColor"
             android:clickable="true"
             android:contentDescription="Turn on the lights"
-            android:src="@drawable/baseline_highlight"
-            app:background="@color/txtColor"
             app:backgroundTint="@color/white"
+            android:src="@drawable/baseline_highlight"
             app:borderWidth="@dimen/borderWidthBtn"
             app:layout_constraintEnd_toEndOf="@+id/horn_actionButton"
             app:layout_constraintStart_toStartOf="@+id/horn_actionButton"
@@ -145,13 +122,12 @@
             app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
             app:layout_constraintTop_toBottomOf="@+id/textViewInfoVelocity" />
 
-        1<com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/action_to_previus_controllerFragment"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/nullGap"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="40dp"
-        android:background="@color/btnColor"
         android:clickable="true"
         android:contentDescription="@string/actionMoveToBluetooth"
         android:src="@drawable/baseline_arrow_back_24"
@@ -161,7 +137,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-        2 <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/action_to_bluetooth_ControllerFragment"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/nullGap"
@@ -197,14 +173,13 @@
             android:id="@+id/textViewVelocity"
             android:layout_width="@dimen/nullGap"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="128dp"
+            android:layout_marginEnd="96dp"
             android:gravity="center"
             android:text="Velocidad Baja"
             android:textColor="@color/txtColor"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/startup_actionButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -232,7 +207,6 @@
             app:layout_constraintHorizontal_bias="0.521"
             app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
