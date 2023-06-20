@@ -3,6 +3,7 @@ package com.example.zacatales.smartrobotapp
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothSocket
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,6 +31,21 @@ class BluetoothFragment : Fragment() {
         by activityViewModels{
             DeviceViewModel.Factory
         }
+
+    interface DatosListener {
+        fun onDatosRecibidos(dato: String)
+    }
+
+    private lateinit var datosListener: DatosListener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            datosListener = context as DatosListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$context debe implementar la interfaz DatosListener")
+        }
+    }
 
     private lateinit var adapter: PairedListAdapter
     private lateinit var binding: FragmentBluetoothBinding
@@ -93,7 +109,8 @@ class BluetoothFragment : Fragment() {
     @SuppressLint("MissingPermission")
     private fun showSelectedItem(device: PairedDevicesInfo){
         deviceViewModel.setSelectedDevice(device)
-        setFragmentResult("key", bundleOf("address" to device.macAddress))
+        //setFragmentResult("key", bundleOf("address" to device.macAddress))
+        datosListener.onDatosRecibidos(device.macAddress)
         /*try {
             if(bluetoothSocket == null || !isConnected){
                 mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter()

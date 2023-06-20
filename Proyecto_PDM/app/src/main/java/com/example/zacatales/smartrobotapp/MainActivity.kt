@@ -16,10 +16,16 @@ import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdap
 import com.example.zacatales.smartrobotapp.Bluetooth.viewmodel.DeviceViewModel
 import com.example.zacatales.smartrobotapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BluetoothFragment.DatosListener {
     private lateinit var binding: ActivityMainBinding
     private var btPermissions = false
     lateinit var address: String
+
+
+    override fun onDatosRecibidos(dato: String) {
+        // Aquí puedes hacer lo que desees con el dato recibido
+        Toast.makeText(this, "Dato recibido: $dato", Toast.LENGTH_SHORT).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 bluetoothPermissionLauncher.launch(android.Manifest.permission.BLUETOOTH_ADMIN)
             }
         }
+
 
     }
 

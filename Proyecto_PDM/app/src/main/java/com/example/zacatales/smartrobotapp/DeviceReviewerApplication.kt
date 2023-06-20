@@ -11,6 +11,9 @@ class DeviceReviewerApplication:Application() {
 
     lateinit var mbluetoothAdapter: BluetoothAdapter
     var list = mutableListOf<PairedDevicesInfo>()
+    val device = mutableListOf(
+        PairedDevicesInfo("","")
+    )
 
 
 

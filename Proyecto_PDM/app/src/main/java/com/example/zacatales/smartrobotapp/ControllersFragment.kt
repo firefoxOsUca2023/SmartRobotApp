@@ -111,7 +111,6 @@ class ControllersFragment : Fragment() {
                 it.findNavController().navigate(R.id.action_controllersFragment2_to_routeFragment)
             }
         }
-
     }
 
     private fun sendCommand(input: String){
