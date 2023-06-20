@@ -21,7 +21,6 @@ class ControllersFragment : Fragment() {
     private lateinit var lightsActionBtn: FloatingActionButton
     private lateinit var hornActionBtn: FloatingActionButton
     private var isButtonPressed = false
-    private var isButtonPressed2 = false
 
 
 
@@ -82,16 +81,6 @@ class ControllersFragment : Fragment() {
                 lightsActionBtn.backgroundTintList = ColorStateList.valueOf(Color.YELLOW) // Cambia el color cuando el botón está presionado
             } else {
                 lightsActionBtn.backgroundTintList= ColorStateList.valueOf(Color.WHITE) // Cambia el color cuando el botón no está presionado
-            }
-        }
-
-        hornActionBtn.setOnClickListener{
-            isButtonPressed2 = !isButtonPressed2 // Cambia el estado del botón
-
-            if (isButtonPressed2) {
-                hornActionBtn.backgroundTintList = ColorStateList.valueOf(Color.YELLOW) // Cambia el color cuando el botón está presionado
-            } else {
-                hornActionBtn.backgroundTintList= ColorStateList.valueOf(Color.WHITE) // Cambia el color cuando el botón no está presionado
             }
         }
 
