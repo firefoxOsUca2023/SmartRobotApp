@@ -10,5 +10,7 @@
     <string name="textTitleBluetooth">Lista de dispositivos</string>
     <string name="name_bluetoothDevice"></string>
     <string name="status_device" />
+    <string name="AjustSpeed">Ajusta la velocidad del carrito</string>
+    <string name="Speed">Velocidad Baja</string>
 
 </resources>
