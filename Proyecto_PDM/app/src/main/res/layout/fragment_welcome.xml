@@ -51,11 +51,11 @@
 
             <ImageView
                 android:id="@+id/imageViewRobotimy"
-                android:layout_width="300dp"
-                android:layout_height="@dimen/nullGap"
-                android:layout_marginStart="@dimen/maxGap"
-                android:layout_marginEnd="@dimen/maxGap"
-                android:layout_marginBottom="@dimen/marginBottonRobotimy"
+                android:layout_width="@dimen/_300sdp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_120sdp"
                 android:src="@drawable/robotimy"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
