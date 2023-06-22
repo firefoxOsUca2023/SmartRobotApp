@@ -9,12 +9,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothConnectionListener
+import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
 import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdapter
 import com.example.zacatales.smartrobotapp.Bluetooth.model.PairedDevicesInfo
 import com.example.zacatales.smartrobotapp.Bluetooth.viewmodel.DeviceViewModel
@@ -27,36 +30,39 @@ const val REQUEST_ENABLE_BT=1
 
 class BluetoothFragment : Fragment() {
 
+    //private lateinit var bluetoothManager: BluetoothManager
+    private var bluetoothControlListener: BluetoothConnectionListener? = null
+
     private val deviceViewModel: DeviceViewModel
         by activityViewModels{
             DeviceViewModel.Factory
         }
 
-    interface DatosListener {
-        fun onDatosRecibidos(dato: String)
-    }
-
-    private lateinit var datosListener: DatosListener
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        try {
-            datosListener = context as DatosListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException("$context debe implementar la interfaz DatosListener")
+        if (context is BluetoothConnectionListener) {
+            bluetoothControlListener = context
+        } else {
+            throw IllegalStateException("La actividad debe implementar la interfaz BluetoothControlListener")
         }
     }
 
-    private lateinit var adapter: PairedListAdapter
+
+
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
+
+
+
+
+        private lateinit var adapter: PairedListAdapter
     private lateinit var binding: FragmentBluetoothBinding
     lateinit var mbluetoothAdapter: BluetoothAdapter
-
-    companion object{
-        var myUUID:UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
-        var bluetoothSocket: BluetoothSocket?=null
-        var isConnected: Boolean = false
-        var Address:String = ""
-    }
 
 
     override fun onCreateView(
@@ -73,7 +79,6 @@ class BluetoothFragment : Fragment() {
     }
 
 
-    @SuppressLint("MissingPermission", "ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -88,7 +93,24 @@ class BluetoothFragment : Fragment() {
                 it.findNavController().navigate(R.id.action_bluetoothFragment_to_controllersFragment2)
             }
         }
+
         setRecyclerView(view)
+
+        //val deviceAddress = "00:20:02:20:11:C8" // Reemplazar con la dirección MAC del dispositivo
+        //bluetoothManager.connectToDevice(deviceAddress)
+
+        /*binding.prueba.setOnClickListener {
+            val dataToSend = "X"
+            bluetoothManager.sendData(dataToSend)
+
+        }*/
+        binding.prueba.setOnClickListener {
+            bluetoothControlListener?.enviarComandoBluetooth("X")
+        }
+        binding.prueba2.setOnClickListener {
+            bluetoothControlListener?.enviarComandoBluetooth("x")
+        }
+        // Enviar datos al otro fragmento
 
     }
 
@@ -99,35 +121,19 @@ class BluetoothFragment : Fragment() {
         adapter = PairedListAdapter{
             selectedDevice ->
             showSelectedItem(selectedDevice)
-            //Toast.makeText(context,selectedDevice.name,Toast.LENGTH_LONG).show()
+
+            //Toast.makeText(context,selectedDevice.macAddress,Toast.LENGTH_LONG).show()
+            bluetoothControlListener?.onBluetoothConnected(selectedDevice.macAddress)
+
         }
         binding.pairedListRV.adapter=adapter
         this
         displayDevices()
     }
 
-    @SuppressLint("MissingPermission")
+
     private fun showSelectedItem(device: PairedDevicesInfo){
         deviceViewModel.setSelectedDevice(device)
-        //setFragmentResult("key", bundleOf("address" to device.macAddress))
-        datosListener.onDatosRecibidos(device.macAddress)
-        /*try {
-            if(bluetoothSocket == null || !isConnected){
-                mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-                val Device: BluetoothDevice = mbluetoothAdapter.getRemoteDevice(device.macAddress)
-                bluetoothSocket = Device.createRfcommSocketToServiceRecord(myUUID)
-                BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
-                bluetoothSocket!!.connect()
-            }
-            Toast.makeText(context,"Conexión exitosa",Toast.LENGTH_LONG).show()
-            Address = device.macAddress
-            val intent = Intent(context, MainActivity::class.java)
-            intent.putExtra("key", Address)
-
-        }catch (e: IOException){
-            e.printStackTrace()
-            Toast.makeText(context,"Error de conexión",Toast.LENGTH_LONG).show()
-        }*/
 
     }
 
@@ -135,25 +141,7 @@ class BluetoothFragment : Fragment() {
         adapter.setData(deviceViewModel.getDevices())
         adapter.notifyDataSetChanged()
     }
-    private fun sendCommand(input: String){
-        if(bluetoothSocket != null){
-            try {
-                bluetoothSocket!!.outputStream.write(input.toByteArray())
-            }catch (e: IOException){
-            }
-        }
-    }
-    private fun disconnect(){
-        if(bluetoothSocket!=null){
-            try {
-                bluetoothSocket!!.close()
-                bluetoothSocket= null
-                isConnected = false
-            }catch (e: IOException){
-                e.printStackTrace()
-            }
-        }
-    }
+
 }
 
 

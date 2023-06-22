@@ -12,7 +12,6 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.zacatales.smartrobotapp.Bluetooth.model.PairedDevicesInfo
 import com.example.zacatales.smartrobotapp.DeviceReviewerApplication
 import com.example.zacatales.smartrobotapp.Bluetooth.repositories.DeviceRepository
-import com.example.zacatales.smartrobotapp.BluetoothFragment.Companion.isConnected
 import com.example.zacatales.smartrobotapp.MainActivity
 import java.io.IOException
 import java.sql.Connection
