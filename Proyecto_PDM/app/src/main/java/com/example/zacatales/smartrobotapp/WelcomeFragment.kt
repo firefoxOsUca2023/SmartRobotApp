@@ -26,23 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class WelcomeFragment : Fragment() {
 
     private lateinit var binding: FragmentWelcomeBinding
-    //private lateinit var bluetoothManager: com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
 
-
-    private var bluetoothControlListener: BluetoothConnectionListener? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is BluetoothConnectionListener) {
-            bluetoothControlListener = context
-        } else {
-            throw IllegalStateException("La actividad debe implementar la interfaz BluetoothControlListener")
-        }
-    }
-    override fun onDetach() {
-        super.onDetach()
-        bluetoothControlListener = null
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +38,7 @@ class WelcomeFragment : Fragment() {
             }
         })
         //bluetoothManager = com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager(requireContext(),this)
-        val mac = "98:D3:71:F5:B3:2A"
+        //val mac = "98:D3:71:F5:B3:2A"
     }
 
     override fun onCreateView(

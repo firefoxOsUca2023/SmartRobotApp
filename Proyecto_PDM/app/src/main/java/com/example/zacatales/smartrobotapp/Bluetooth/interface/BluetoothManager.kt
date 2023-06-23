@@ -14,9 +14,7 @@ import java.util.*
 
 class BluetoothManager(private val context: Context, private val listener: BluetoothConnectionListener) {
 
-    private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-    private var bluetoothSocket: BluetoothSocket? = null
-    private var outputStream: OutputStream? = null
+
 
     @SuppressLint("MissingPermission")
     fun conectarDispositivo(address: String) {
@@ -74,5 +72,8 @@ class BluetoothManager(private val context: Context, private val listener: Bluet
 
     companion object {
         private val MY_UUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+        private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+        private var bluetoothSocket: BluetoothSocket? = null
+        private var outputStream: OutputStream? = null
     }
 }

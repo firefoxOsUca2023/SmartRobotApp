@@ -3,6 +3,7 @@ package com.example.zacatales.smartrobotapp
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothHeadset
 import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.Intent
@@ -32,7 +33,7 @@ import java.io.IOException
 import java.util.UUID
 
 
-class ControllersFragment : Fragment(),BluetoothConnectionListener{
+class ControllersFragment : Fragment(){
 
     private lateinit var btnToBack: FloatingActionButton
     private lateinit var btnToBluetooth: FloatingActionButton
@@ -41,70 +42,30 @@ class ControllersFragment : Fragment(),BluetoothConnectionListener{
     private lateinit var horn: FloatingActionButton
     private lateinit var binding: FragmentControllersBinding
     private lateinit var adapter: PairedListAdapter
-    private lateinit var bluetoothManager: BluetoothManager
+    //private lateinit var bluetoothManager: BluetoothManager
     private var bluetoothControlListener: BluetoothConnectionListener? = null
 
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bluetoothManager = BluetoothManager(requireContext(),this)
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+            if (context is BluetoothConnectionListener) {
+                bluetoothControlListener = context
+            } else {
+                throw IllegalStateException("La actividad debe implementar la interfaz BluetoothControlListener")
+            }
 
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        bluetoothControlListener=null
+    }
 
-
-
-
-
-
-
-/*
-    @SuppressLint("MissingPermission")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //resources.configuration.orientation = Configuration.ORIENTATION_LANDSCAPE
-        activity?.apply {
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        }
-        /*val datos = arguments?.getString("datos")
-
-        Toast.makeText(context,"mac: "+ datos,Toast.LENGTH_LONG).show()
-
-
-        if(datos!=null){
-           try {
-               if(bluetoothSocket == null || !isConnected){
-                   mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-                   val Device: BluetoothDevice = mbluetoothAdapter.getRemoteDevice(datos)
-                   bluetoothSocket = Device.createRfcommSocketToServiceRecord(myUUID)
-                   BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
-                   bluetoothSocket!!.connect()
-               }
-               Toast.makeText(context,"Conexión exitosa",Toast.LENGTH_LONG).show()
-
-           }catch (e: IOException){
-               e.printStackTrace()
-               Toast.makeText(context,"Error de conexión",Toast.LENGTH_LONG).show()
-           }
-       }*/
-
-
-    }*/
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /*val callback = object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                findNavController().popBackStack()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(callback)*/
         // Inflate the layout for this fragment
         activity?.apply {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -118,6 +79,11 @@ class ControllersFragment : Fragment(),BluetoothConnectionListener{
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        if(mbluetoothAdapter.getProfileConnectionState(BluetoothHeadset.HEADSET)== BluetoothAdapter.STATE_DISCONNECTED){
+            Toast.makeText(context,"Conectate",Toast.LENGTH_SHORT).show()
+        }
+
         //    int orientation = yourActivityName.this.getResources().getConfiguration().orientation;
         binding.actionToPreviusControllerFragment.setOnClickListener {
             activity?.apply {
@@ -136,33 +102,24 @@ class ControllersFragment : Fragment(),BluetoothConnectionListener{
                 it.findNavController().navigate(R.id.action_controllersFragment2_to_routeFragment)
             }
         }
-
-        //val deviceAddress = "00:20:02:20:11:C8" // Reemplazar con la dirección MAC del dispositivo
-        //bluetoothManager.connectToDevice(deviceAddress)
+        binding.lightsActionButton.setOnClickListener {
+            bluetoothControlListener?.enviarComandoBluetooth("x")
+        }
 
         binding.hornActionButton.setOnClickListener {
-            //bluetoothControlListener?.enviarComandoBluetooth("X")
+            bluetoothControlListener?.enviarComandoBluetooth("X")
             //bluetoothControlListener?.onCommandBluetooth("X")
-            bluetoothManager.enviarComando("X")
+            //bluetoothManager.enviarComando("X")
         }
         binding.routeActionButton.setOnClickListener {
             //bluetoothManager.enviarComando("X")
-            //bluetoothControlListener?.enviarComandoBluetooth("x")
+            bluetoothControlListener?.onBluetoothDisconnected()
+        }
+        binding.upActionButton.setOnClickListener {
+            bluetoothControlListener?.enviarComandoBluetooth("F")
         }
 
 
-    }
-
-    override fun onBluetoothConnected(address: String) {
-    }
-
-    override fun enviarComandoBluetooth(comando: String) {
-    }
-
-    override fun onBluetoothConnectionError(error: String) {
-    }
-
-    override fun onBluetoothDisconnected() {
     }
 
 

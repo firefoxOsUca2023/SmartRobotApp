@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothConnectionListener
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
+import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.Comunication
 import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdapter
 import com.example.zacatales.smartrobotapp.Bluetooth.model.PairedDevicesInfo
 import com.example.zacatales.smartrobotapp.Bluetooth.viewmodel.DeviceViewModel
@@ -28,7 +30,7 @@ import java.util.UUID
 const val REQUEST_ENABLE_BT=1
 
 
-class BluetoothFragment : Fragment() {
+class BluetoothFragment : Fragment(){
 
     //private lateinit var bluetoothManager: BluetoothManager
     private var bluetoothControlListener: BluetoothConnectionListener? = null
@@ -38,6 +40,7 @@ class BluetoothFragment : Fragment() {
             DeviceViewModel.Factory
         }
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is BluetoothConnectionListener) {
@@ -46,6 +49,22 @@ class BluetoothFragment : Fragment() {
             throw IllegalStateException("La actividad debe implementar la interfaz BluetoothControlListener")
         }
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        bluetoothControlListener=null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //bluetoothManager = BluetoothManager(requireContext(),this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //bluetoothManager = BluetoothManager(requireContext(),this)
+    }
+
 
 
 
@@ -105,10 +124,10 @@ class BluetoothFragment : Fragment() {
 
         }*/
         binding.prueba.setOnClickListener {
-            bluetoothControlListener?.enviarComandoBluetooth("X")
+            //bluetoothControlListener?.enviarComandoBluetooth("X")
         }
         binding.prueba2.setOnClickListener {
-            bluetoothControlListener?.enviarComandoBluetooth("x")
+            //bluetoothControlListener?.enviarComandoBluetooth("x")
         }
         // Enviar datos al otro fragmento
 
@@ -121,7 +140,7 @@ class BluetoothFragment : Fragment() {
         adapter = PairedListAdapter{
             selectedDevice ->
             showSelectedItem(selectedDevice)
-
+            //bluetoothManager.conectarDispositivo(selectedDevice.macAddress)
             //Toast.makeText(context,selectedDevice.macAddress,Toast.LENGTH_LONG).show()
             bluetoothControlListener?.onBluetoothConnected(selectedDevice.macAddress)
 
@@ -141,6 +160,8 @@ class BluetoothFragment : Fragment() {
         adapter.setData(deviceViewModel.getDevices())
         adapter.notifyDataSetChanged()
     }
+
+
 
 }
 
