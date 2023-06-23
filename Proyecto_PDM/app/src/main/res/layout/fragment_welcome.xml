@@ -6,6 +6,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        style="@style/backgroundColor"
        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +43,7 @@
                 android:fontFamily="@font/mali_light"
                 android:gravity="center"
                 android:text="@string/textTitleMain"
-                android:textColor="@color/txtColor"
+                style="@style/textColor"
                 android:textSize="@dimen/_50ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +103,7 @@
                 android:fontFamily="@font/mali_light"
                 android:gravity="center"
                 android:text="@string/NameApp"
-                android:textColor="@color/txtColor"
+                style="@style/textColor"
                 android:textSize="@dimen/appNameSize"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

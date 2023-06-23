@@ -18,7 +18,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        style="@style/backgroundCardview">
 
         <TextView
             android:id="@+id/name_device"
@@ -27,7 +28,7 @@
             android:layout_marginStart="30dp"
             android:contentDescription="NameDevice"
             android:fontFamily="@font/mali_light"
-            android:textColor="@color/txtColor"
+            style="@style/textColor"
             android:gravity="center_vertical"
             android:text="@string/name_bluetoothDevice"
             android:textSize="20sp"
@@ -46,7 +47,7 @@
             android:fontFamily="@font/mali_light"
             android:gravity="center_vertical"
             android:text="@string/status_device"
-            android:textColor="@color/txtColor"
+            style="@style/textColor"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

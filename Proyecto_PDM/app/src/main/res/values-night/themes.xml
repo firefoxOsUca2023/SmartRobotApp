@@ -6,4 +6,13 @@
 
         <item name="android:navigationBarColor">@color/primary</item>
     </style>
+    <style name="textColor">
+        <item name="android:textColor">@color/pressColor</item>
+    </style>
+    <style name="backgroundColor">
+        <item name="android:background">@color/black</item>
+    </style>
+    <style name="backgroundCardview">
+        <item name="android:background">#B936383C</item>
+    </style>
 </resources>

@@ -2,10 +2,22 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SmartRobotApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimary">@color/txtColor</item>
 
-        <item name="android:navigationBarColor">@color/primary</item>
+        <item name="android:navigationBarColor">@color/txtColor</item>
     </style>
 
     <style name="Theme.SmartRobotApp" parent="Base.Theme.SmartRobotApp" />
+    <style name="Color">
+
+    </style>
+    <style name="textColor">
+        <item name="android:textColor">@color/txtColor</item>
+    </style>
+    <style name="backgroundColor">
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="backgroundCardview">
+        <item name="android:background">@color/CardDevice</item>
+    </style>
 </resources>

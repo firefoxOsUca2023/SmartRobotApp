@@ -1,5 +1,6 @@
 package com.example.zacatales.smartrobotapp
 
+import android.app.UiModeManager.MODE_NIGHT_YES
 import android.content.pm.ActivityInfo
 import android.content.res.ColorStateList
 import android.content.res.Configuration
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,6 +32,8 @@ class ControllersFragment : Fragment() {
         activity?.apply {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
+
+
     }
 
 

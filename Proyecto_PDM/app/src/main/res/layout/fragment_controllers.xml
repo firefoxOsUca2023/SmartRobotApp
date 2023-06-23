@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        style="@style/backgroundColor">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/horn_actionButton"
@@ -152,7 +153,7 @@
             android:layout_marginBottom="@dimen/maxGap"
             android:gravity="center"
             android:text="@string/NameApp"
-            android:textColor="@color/txtColor"
+            style="@style/textColor"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -167,7 +168,7 @@
             android:layout_marginEnd="@dimen/_100sdp"
             android:gravity="center"
             android:text="@string/Speed"
-            android:textColor="@color/txtColor"
+            style="@style/textColor"
             android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -179,7 +180,7 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:gravity="center"
             android:text="@string/AjustSpeed"
-            android:textColor="@color/txtColor"
+            style="@style/textColor"
             android:textSize="@dimen/_15ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
