@@ -43,7 +43,7 @@ class BluetoothFragment : Fragment() {
         if (context is BluetoothConnectionListener) {
             bluetoothControlListener = context
         } else {
-            throw IllegalStateException("La actividad debe implementar la interfaz BluetoothControlListener")
+            throw IllegalStateException(getString(R.string.activityRequired))
         }
     }
 

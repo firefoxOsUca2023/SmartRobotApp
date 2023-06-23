@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Context
+import com.example.zacatales.smartrobotapp.R
 import java.io.IOException
 import java.io.OutputStream
 import java.util.*
@@ -41,12 +42,12 @@ class BluetoothManager(private val context: Context, private val listener: Bluet
                     listener.onBluetoothConnected(address)
                 } else {
                     // No se pudo obtener el outputStream
-                    listener.onBluetoothConnectionError("Error no se pudo obtener outputStream")
+                    listener.onBluetoothConnectionError(context.getString(R.string.errrOuput))
                 }
 
             } catch (e: IOException) {
                 // Ocurrió un error al establecer la conexión
-                listener.onBluetoothConnectionError("Error no se pudo conectar")
+                listener.onBluetoothConnectionError(context.getString(R.string.errConecction))
             }
         }.start()
     }
@@ -57,7 +58,7 @@ class BluetoothManager(private val context: Context, private val listener: Bluet
                 outputStream?.write(comando.toByteArray())
                 outputStream?.flush()
             } catch (e: IOException) {
-                listener.onBluetoothConnectionError("Error no se pudo obtener outputStream")
+                listener.onBluetoothConnectionError(context.getString(R.string.errrOuput))
             }
         }
     }

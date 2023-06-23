@@ -7,7 +7,9 @@ import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -43,6 +45,7 @@ class ControllersFragment : Fragment(),BluetoothConnectionListener{
     private lateinit var adapter: PairedListAdapter
     private lateinit var bluetoothManager: BluetoothManager
     private var bluetoothControlListener: BluetoothConnectionListener? = null
+    private var isLightsActionButtonPressed = false
 
 
 
@@ -53,14 +56,6 @@ class ControllersFragment : Fragment(),BluetoothConnectionListener{
 
 
     }
-
-
-
-
-
-
-
-
 /*
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,7 +106,14 @@ class ControllersFragment : Fragment(),BluetoothConnectionListener{
         }
         binding= FragmentControllersBinding.inflate(inflater,container,false)
 
+        binding.fragment = this // Pasamos una referencia del fragmento al databinding
+        binding.isLightsActionButtonPressed = isLightsActionButtonPressed
         return binding.root
+
+    }
+    fun lightsActionButton(view: View) {
+        isLightsActionButtonPressed = !isLightsActionButtonPressed
+        binding.isLightsActionButtonPressed= isLightsActionButtonPressed
     }
 
 
@@ -152,8 +154,23 @@ class ControllersFragment : Fragment(),BluetoothConnectionListener{
 
 
     }
-
     override fun onBluetoothConnected(address: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun enviarComandoBluetooth(comando: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBluetoothConnectionError(error: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBluetoothDisconnected() {
+        TODO("Not yet implemented")
+    }
+
+    /*override fun onBluetoothConnected(address: String) {
     }
 
     override fun enviarComandoBluetooth(comando: String) {
@@ -163,7 +180,6 @@ class ControllersFragment : Fragment(),BluetoothConnectionListener{
     }
 
     override fun onBluetoothDisconnected() {
-    }
-
+    }*/
 
 }

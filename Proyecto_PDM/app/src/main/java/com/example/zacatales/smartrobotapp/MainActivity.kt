@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
         val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
         val bluetoothAdapter: BluetoothAdapter = bluetoothManager.adapter
         if(bluetoothAdapter==null){
-            Toast.makeText(this,"El dispositivo no soporta Bluetooth",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,getString(R.string.notSupportBt),Toast.LENGTH_LONG).show()
         }
         else{
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
     }
 
     fun can(){
-        Toast.makeText(this,"Bluetooth conectado con exito",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,getString(R.string.connectSucessful),Toast.LENGTH_LONG).show()
     }
 
     override fun onBluetoothConnected(address: String) {
