@@ -28,26 +28,33 @@ import java.util.UUID
 const val REQUEST_ENABLE_BT=1
 
 
-class BluetoothFragment : Fragment() {
+class BluetoothFragment : Fragment(){
 
+
+    private lateinit var adapter: PairedListAdapter
+    private lateinit var binding: FragmentBluetoothBinding
+    lateinit var mbluetoothAdapter: BluetoothAdapter
     //private lateinit var bluetoothManager: BluetoothManager
     private var bluetoothControlListener: BluetoothConnectionListener? = null
 
     private val deviceViewModel: DeviceViewModel
-        by activityViewModels{
-            DeviceViewModel.Factory
-        }
+            by activityViewModels{
+                DeviceViewModel.Factory
+            }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is BluetoothConnectionListener) {
             bluetoothControlListener = context
         } else {
-            throw IllegalStateException(getString(R.string.activityRequired))
+            throw IllegalStateException("La actividad debe implementar la interfaz BluetoothControlListener")
         }
     }
 
-
+    override fun onDetach() {
+        super.onDetach()
+        bluetoothControlListener=null
+    }
 
 
 
@@ -56,13 +63,6 @@ class BluetoothFragment : Fragment() {
 
     }
 
-
-
-
-
-        private lateinit var adapter: PairedListAdapter
-    private lateinit var binding: FragmentBluetoothBinding
-    lateinit var mbluetoothAdapter: BluetoothAdapter
 
 
     override fun onCreateView(
@@ -96,22 +96,6 @@ class BluetoothFragment : Fragment() {
 
         setRecyclerView(view)
 
-        //val deviceAddress = "00:20:02:20:11:C8" // Reemplazar con la dirección MAC del dispositivo
-        //bluetoothManager.connectToDevice(deviceAddress)
-
-        /*binding.prueba.setOnClickListener {
-            val dataToSend = "X"
-            bluetoothManager.sendData(dataToSend)
-
-        }*/
-        binding.prueba.setOnClickListener {
-            bluetoothControlListener?.enviarComandoBluetooth("X")
-        }
-        binding.prueba2.setOnClickListener {
-            bluetoothControlListener?.enviarComandoBluetooth("x")
-        }
-        // Enviar datos al otro fragmento
-
     }
 
 
@@ -119,9 +103,9 @@ class BluetoothFragment : Fragment() {
     private fun setRecyclerView(view: View){
         binding.pairedListRV.layoutManager = LinearLayoutManager(view.context)
         adapter = PairedListAdapter{
-            selectedDevice ->
+                selectedDevice ->
             showSelectedItem(selectedDevice)
-
+            //bluetoothManager.conectarDispositivo(selectedDevice.macAddress)
             //Toast.makeText(context,selectedDevice.macAddress,Toast.LENGTH_LONG).show()
             bluetoothControlListener?.onBluetoothConnected(selectedDevice.macAddress)
 
@@ -141,6 +125,8 @@ class BluetoothFragment : Fragment() {
         adapter.setData(deviceViewModel.getDevices())
         adapter.notifyDataSetChanged()
     }
+
+
 
 }
 

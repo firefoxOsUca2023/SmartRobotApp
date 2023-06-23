@@ -12,12 +12,7 @@ import com.example.zacatales.smartrobotapp.R
 import java.io.IOException
 import java.io.OutputStream
 import java.util.*
-
 class BluetoothManager(private val context: Context, private val listener: BluetoothConnectionListener) {
-
-    private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-    private var bluetoothSocket: BluetoothSocket? = null
-    private var outputStream: OutputStream? = null
 
     @SuppressLint("MissingPermission")
     fun conectarDispositivo(address: String) {
@@ -42,12 +37,12 @@ class BluetoothManager(private val context: Context, private val listener: Bluet
                     listener.onBluetoothConnected(address)
                 } else {
                     // No se pudo obtener el outputStream
-                    listener.onBluetoothConnectionError(context.getString(R.string.errrOuput))
+                    listener.onBluetoothConnectionError("Error no se pudo obtener outputStream")
                 }
 
             } catch (e: IOException) {
                 // Ocurrió un error al establecer la conexión
-                listener.onBluetoothConnectionError(context.getString(R.string.errConecction))
+                listener.onBluetoothConnectionError("Error no se pudo conectar")
             }
         }.start()
     }
@@ -58,7 +53,7 @@ class BluetoothManager(private val context: Context, private val listener: Bluet
                 outputStream?.write(comando.toByteArray())
                 outputStream?.flush()
             } catch (e: IOException) {
-                listener.onBluetoothConnectionError(context.getString(R.string.errrOuput))
+                listener.onBluetoothConnectionError("Error no se pudo obtener outputStream")
             }
         }
     }
@@ -75,5 +70,8 @@ class BluetoothManager(private val context: Context, private val listener: Bluet
 
     companion object {
         private val MY_UUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+        private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+        private var bluetoothSocket: BluetoothSocket? = null
+        private var outputStream: OutputStream? = null
     }
 }
