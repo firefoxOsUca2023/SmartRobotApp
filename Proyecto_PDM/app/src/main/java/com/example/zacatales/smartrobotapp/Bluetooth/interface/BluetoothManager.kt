@@ -8,11 +8,31 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Context
+import android.widget.Toast
+import com.example.zacatales.smartrobotapp.BluetoothFragment
 import com.example.zacatales.smartrobotapp.R
 import java.io.IOException
 import java.io.OutputStream
 import java.util.*
-class BluetoothManager(private val context: Context, private val listener: BluetoothConnectionListener) {
+class BluetoothManager(private val context: Context, private var listener: BluetoothConnectionListener) {
+
+    var isConnected: Boolean = false
+    /*
+     fun setListener(listener: BluetoothManagerListener) {
+        this.listener = listener
+    }
+    * */
+
+    fun setListener(listener2: BluetoothConnectionListener){
+        this.listener = listener2
+    }
+
+    private fun showToast(error: String) {
+
+        listener?.onBluetoothConnectionError(error)
+
+    }
+
 
     @SuppressLint("MissingPermission")
     fun conectarDispositivo(address: String) {
@@ -29,20 +49,34 @@ class BluetoothManager(private val context: Context, private val listener: Bluet
             try {
                 bluetoothSocket = device.createRfcommSocketToServiceRecord(MY_UUID)
                 bluetoothSocket?.connect()
-
+                listener.onBluetoothConnected(address)
+                showToast("EXITO")
+                isConnected = true
                 outputStream = bluetoothSocket?.outputStream
 
                 if (outputStream != null) {
                     // La conexión ha sido establecida, realiza operaciones de lectura/escritura aquí
                     listener.onBluetoothConnected(address)
+                    showToast("EXITO")
+                    isConnected = true
                 } else {
                     // No se pudo obtener el outputStream
-                    listener.onBluetoothConnectionError("Error no se pudo obtener outputStream")
+                    //val error = "Error al mandar el comando"
+                    //showToast(error)
+                    //listener.onBluetoothConnectionError(error)
+                    //listener.onBluetoothConnectionError("Error no se pudo obtener outputStream")
+                    listener.onBluetoothConnectionError("error")
+                    showToast("error")
+
                 }
 
             } catch (e: IOException) {
                 // Ocurrió un error al establecer la conexión
-                listener.onBluetoothConnectionError("Error no se pudo conectar")
+                //listener.onBluetoothConnectionError("Error no se pudo conectar")
+                val error = "Error: no se pudo conectar al dispositivo"
+                listener.onBluetoothConnectionError(error)
+                showToast(error)
+                //listener.onBluetoothConnectionError(error)
             }
         }.start()
     }
@@ -53,7 +87,10 @@ class BluetoothManager(private val context: Context, private val listener: Bluet
                 outputStream?.write(comando.toByteArray())
                 outputStream?.flush()
             } catch (e: IOException) {
-                listener.onBluetoothConnectionError("Error no se pudo obtener outputStream")
+                val error = "Todavia no se ha conectado a ningún dispostivo"
+                listener.onBluetoothConnectionError(error)
+                showToast(error)
+                //listener.onBluetoothConnectionError(error)
             }
         }
     }
@@ -65,6 +102,10 @@ class BluetoothManager(private val context: Context, private val listener: Bluet
             listener.onBluetoothDisconnected()
         } catch (e: IOException) {
             // Ocurrió un error al desconectar el dispositivo
+            val error = "Error al desconectar"
+            listener.onBluetoothConnectionError(error)
+            //showToast(error)
+
         }
     }
 

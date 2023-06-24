@@ -2,7 +2,6 @@ package com.example.zacatales.smartrobotapp
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -10,10 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothConnectionListener
@@ -22,19 +19,16 @@ import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdap
 import com.example.zacatales.smartrobotapp.Bluetooth.model.PairedDevicesInfo
 import com.example.zacatales.smartrobotapp.Bluetooth.viewmodel.DeviceViewModel
 import com.example.zacatales.smartrobotapp.databinding.FragmentBluetoothBinding
-import java.io.IOException
-import java.util.UUID
 
 const val REQUEST_ENABLE_BT=1
 
 
-class BluetoothFragment : Fragment(){
-
+class BluetoothFragment : Fragment(), BluetoothConnectionListener{
 
     private lateinit var adapter: PairedListAdapter
     private lateinit var binding: FragmentBluetoothBinding
     lateinit var mbluetoothAdapter: BluetoothAdapter
-    //private lateinit var bluetoothManager: BluetoothManager
+    private lateinit var bluetoothManager: BluetoothManager
     private var bluetoothControlListener: BluetoothConnectionListener? = null
 
     private val deviceViewModel: DeviceViewModel
@@ -60,9 +54,10 @@ class BluetoothFragment : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        bluetoothManager = BluetoothManager(requireContext(),this)
+        bluetoothManager.setListener(this)
 
     }
-
 
 
     override fun onCreateView(
@@ -126,6 +121,24 @@ class BluetoothFragment : Fragment(){
         adapter.notifyDataSetChanged()
     }
 
+    override fun onBluetoothConnected(address: String) {
+        showToast("Exito")
+    }
+
+    override fun enviarComandoBluetooth(comando: String) {
+    }
+
+    override fun onBluetoothConnectionError(error: String) {
+    }
+
+    override fun onBluetoothDisconnected() {
+    }
+
+    private fun showToast(message: String) {
+        requireActivity().runOnUiThread {
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
 }
