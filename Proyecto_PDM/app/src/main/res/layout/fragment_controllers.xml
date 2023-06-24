@@ -43,9 +43,9 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/up_actionButton"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/nullGap"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="124dp"
             android:layout_marginTop="@dimen/_50sdp"
-            android:layout_marginStart="125dp"
             android:clickable="true"
             android:contentDescription="Go forward"
             android:src="@drawable/baseline_arrow_up_24"
@@ -54,7 +54,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.491" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/left_actionButton"
@@ -74,33 +74,35 @@
             android:id="@+id/right_actionButton"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/nullGap"
-            android:layout_marginStart="@dimen/_150sdp"
-            android:layout_marginTop="@dimen/_100sdp"
+            android:layout_marginStart="88dp"
             android:clickable="true"
             android:contentDescription="Turn to the right"
             android:src="@drawable/baseline_arrow_right_24"
             app:backgroundTint="@drawable/press_control_button"
             app:borderWidth="@dimen/borderWidthBtn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/left_actionButton"
+            app:layout_constraintStart_toEndOf="@+id/left_actionButton"
+            app:layout_constraintTop_toTopOf="@+id/left_actionButton"
+            app:layout_constraintVertical_bias="1.0" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/back_actionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/nullGap"
-            android:layout_marginTop="@dimen/_150sdp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="76dp"
             android:clickable="true"
             android:contentDescription="Turn back"
             android:src="@drawable/outline_arrow_down_24"
             app:backgroundTint="@drawable/press_control_button"
             app:borderWidth="@dimen/borderWidthBtn"
             app:layout_constraintEnd_toEndOf="@+id/up_actionButton"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/up_actionButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/up_actionButton" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/route_actionButton"
-            android:layout_width="wrap_content"
+            android:layout_width="56dp"
             android:layout_height="@dimen/nullGap"
             android:layout_marginTop="@dimen/_21sdp"
             android:clickable="true"
@@ -108,9 +110,8 @@
             android:src="@drawable/outline_map_24"
             app:backgroundTint="@drawable/press_control_button"
             app:borderWidth="@dimen/borderWidthBtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.517"
-            app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
+            app:layout_constraintEnd_toEndOf="@+id/textViewInfoVelocity"
+            app:layout_constraintStart_toStartOf="@+id/textViewInfoVelocity"
             app:layout_constraintTop_toBottomOf="@+id/textViewInfoVelocity" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -162,28 +163,28 @@
 
         <TextView
             android:id="@+id/textViewVelocity"
-            android:layout_width="@dimen/nullGap"
+            style="@style/textColor"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_70sdp"
-            android:layout_marginEnd="@dimen/_100sdp"
             android:gravity="center"
             android:text="@string/Speed"
-            style="@style/textColor"
             android:textSize="@dimen/_20ssp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textViewInfoVelocity"
+            style="@style/textColor"
             android:layout_width="@dimen/nullGap"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:gravity="center"
             android:text="@string/AjustSpeed"
-            style="@style/textColor"
             android:textSize="@dimen/_15ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
+            app:layout_constraintEnd_toEndOf="@+id/seekBar"
+            app:layout_constraintStart_toStartOf="@+id/seekBar"
             app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <SeekBar
@@ -191,10 +192,10 @@
             android:layout_width="@dimen/_219sdp"
             android:layout_height="@dimen/_29sdp"
             android:layout_marginTop="@dimen/_100sdp"
-            android:thumbTint="#FFDFDF"
             android:progressTint="#FFDFDF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/horn_actionButton"
+            android:thumbTint="#FFDFDF"
+            app:layout_constraintEnd_toEndOf="@+id/textViewVelocity"
+            app:layout_constraintStart_toStartOf="@+id/textViewVelocity"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

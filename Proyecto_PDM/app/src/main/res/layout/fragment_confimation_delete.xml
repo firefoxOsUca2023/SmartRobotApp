@@ -26,29 +26,31 @@
 
     <TextView
         android:id="@+id/textViewConfirmation"
+        style="@style/textColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="¿Seguro que deseas eliminar el historial de tu recorrido?"
-        style="@style/textColor"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewNameAppController"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardPublicity" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewNameAppController"
+        style="@style/textColor"
         android:layout_width="@dimen/nullGap"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="@string/NameApp"
-        style="@style/textColor"
 
+        android:text="@string/NameApp"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
