@@ -253,7 +253,9 @@
                             android:layout_margin="20dp"
                             android:layout_height="29dp"
                             android:thumbTint="#FFDFDF"
-                            android:progressTint="#FFDFDF" />
+                            android:progressTint="#FFDFDF"
+                            android:max="100"
+                            android:progress="10"/>
 
 
 
