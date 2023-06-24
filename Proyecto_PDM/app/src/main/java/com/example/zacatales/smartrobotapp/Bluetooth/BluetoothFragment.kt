@@ -2,13 +2,17 @@ package com.example.zacatales.smartrobotapp
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.registerReceiver
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -30,6 +34,7 @@ class BluetoothFragment : Fragment(), BluetoothConnectionListener{
     lateinit var mbluetoothAdapter: BluetoothAdapter
     private lateinit var bluetoothManager: BluetoothManager
     private var bluetoothControlListener: BluetoothConnectionListener? = null
+
 
     private val deviceViewModel: DeviceViewModel
             by activityViewModels{

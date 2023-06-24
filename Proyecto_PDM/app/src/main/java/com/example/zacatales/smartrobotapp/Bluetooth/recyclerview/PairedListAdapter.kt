@@ -22,11 +22,22 @@ class PairedListAdapter(private val clickListener: (PairedDevicesInfo) -> Unit)
 
     override fun onBindViewHolder(holder: PairedListViewHolder, position: Int) {
         var device = devices[position]
-        holder.bind(device,clickListener)
+        holder.bind(device,isBluetoothConnected(),clickListener)
     }
     fun setData(devicesList: MutableList<PairedDevicesInfo>){
         devices.clear()
         devices.addAll(devicesList)
+    }
+
+    private var bluetoothConnected = false
+
+    fun updateBluetoothStatus(connected: Boolean) {
+        bluetoothConnected = connected
+        notifyDataSetChanged()
+    }
+
+    fun isBluetoothConnected(): Boolean {
+        return bluetoothConnected
     }
 
 

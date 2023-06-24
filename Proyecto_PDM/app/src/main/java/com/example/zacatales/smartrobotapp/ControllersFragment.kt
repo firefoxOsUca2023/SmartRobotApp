@@ -6,9 +6,10 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -31,8 +32,11 @@ class ControllersFragment : Fragment() {
     private lateinit var bluetoothManager: BluetoothManager
     private var bluetoothControlListener: BluetoothConnectionListener? = null
     private lateinit var bluetoothAdapter: BluetoothAdapter
+    private lateinit var seekBar: SeekBar
 
     private var buttonPressCount = 0
+    var isButton1Pressed = false
+    var isButton2Pressed = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,6 +52,13 @@ class ControllersFragment : Fragment() {
         super.onDetach()
         bluetoothControlListener = null
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        bluetoothControlListener?.enviarComandoBluetooth("x")
+    }
+
+
 
 
     override fun onCreateView(
@@ -65,11 +76,10 @@ class ControllersFragment : Fragment() {
     }
 
 
-    @SuppressLint("MissingPermission", "SuspiciousIndentation")
+    @SuppressLint("MissingPermission", "SuspiciousIndentation", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-
 
             //    int orientation = yourActivityName.this.getResources().getConfiguration().orientation;
             binding.actionToPreviusControllerFragment.setOnClickListener {
@@ -100,65 +110,135 @@ class ControllersFragment : Fragment() {
                 }
             }
 
-            binding.hornActionButton.setOnClickListener {
-                buttonPressCount++
-                if (buttonPressCount == 1) {
-                    val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.pressColor)
-                    binding.hornActionButton.setBackgroundTintList(colorStateList)
+        binding.hornActionButton.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    // Se presionó el botón
                     bluetoothControlListener?.enviarComandoBluetooth("V")
-                } else if (buttonPressCount == 2) {
-                    val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.white)
-                    binding.hornActionButton.setBackgroundTintList(colorStateList)
+                }
+                MotionEvent.ACTION_UP -> {
+                    // Se soltó el botón
                     bluetoothControlListener?.enviarComandoBluetooth("v")
-                    buttonPressCount = 0
                 }
             }
+            true
+        }
 
-
-
-
-
-
-        //BluetoothAdapter.getDefaultAdapter().getProfileConnectionState(BluetoothProfile.HEALTH) == BluetoothProfile.STATE_CONNECTED
-
-        /*if(mbluetoothAdapter.getProfileConnectionState(BluetoothHeadset.HEADSET)== BluetoothAdapter.STATE_DISCONNECTED){
-            Toast.makeText(context,"Conectate",Toast.LENGTH_SHORT).show()
-        }*/
-
-        //bluetoothManager = BluetoothManager(requireContext(),this)
-        //bluetoothManager.setListener(this)
-        /*if(!bluetoothManager.isConnected){
-            binding.lightsActionButton.setOnClickListener {
-                Toast.makeText(context, "message", Toast.LENGTH_SHORT).show()
-            }
-
-            binding.hornActionButton.setOnClickListener {
-                Toast.makeText(context, "message", Toast.LENGTH_SHORT).show()
-                //bluetoothControlListener?.onCommandBluetooth("X")
-                //bluetoothManager.enviarComando("X")
-            }
-            binding.upActionButton.setOnClickListener {
-                //bluetoothControlListener?.onBluetoothDisconnected()
-                Toast.makeText(context, "message", Toast.LENGTH_SHORT).show()
-            }
-
-            binding.actionToPreviusControllerFragment.setOnClickListener {
-                activity?.apply {
-                    activity?.onBackPressedDispatcher?.onBackPressed()
+        binding.upActionButton.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    isButton1Pressed = true
+                    bluetoothControlListener?.enviarComandoBluetooth("F")
+                    moveForwardRight()
+                    //moveForwardLeft()
+                }
+                MotionEvent.ACTION_UP -> {
+                    bluetoothControlListener?.enviarComandoBluetooth("S")
+                    isButton1Pressed = false
+                    moveForwardRight()
+                    //moveForwardLeft()
                 }
             }
+            true
+        }
 
-            binding.actionToBluetoothControllerFragment.setOnClickListener {
-
-                activity?.apply {
-                    it.findNavController().navigate(R.id.action_controllersFragment2_to_bluetoothFragment)
+        binding.rightActionButton.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    bluetoothControlListener?.enviarComandoBluetooth("R")
+                    isButton2Pressed = true
+                    moveForwardRight()
+                }
+                MotionEvent.ACTION_UP -> {
+                    bluetoothControlListener?.enviarComandoBluetooth("S")
+                    isButton2Pressed = false
+                    moveForwardRight()
                 }
             }
-        }*/
+            true
+        }
 
+        binding.leftActionButton.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    bluetoothControlListener?.enviarComandoBluetooth("L")
+                    isButton2Pressed = true
+                    moveForwardLeft()
+                }
+                MotionEvent.ACTION_UP -> {
+                    bluetoothControlListener?.enviarComandoBluetooth("S")
+                    isButton2Pressed = false
+                    moveForwardLeft()
+                }
+            }
+            true
+        }
+
+        binding.backActionButton.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    bluetoothControlListener?.enviarComandoBluetooth("B")
+                    isButton2Pressed = true
+                    moveBackwardsLeft()
+                    moveBackwardsRight()
+                }
+                MotionEvent.ACTION_UP -> {
+                    bluetoothControlListener?.enviarComandoBluetooth("S")
+                    isButton2Pressed = false
+                    moveBackwardsLeft()
+                    moveBackwardsRight()
+                }
+            }
+            true
+        }
 
     }
+    fun moveForwardRight() {
+        if (isButton1Pressed && isButton2Pressed) {
+            // Ambos botones están presionados
+            // Realiza tus validaciones o acciones aquí
+            bluetoothControlListener?.enviarComandoBluetooth("I")
+        } else {
+            // Al menos uno de los botones no está presionado
+            // Realiza las acciones necesarias en caso de no cumplir la combinación
+        }
+    }
+
+    fun moveForwardLeft() {
+        if (isButton1Pressed && isButton2Pressed) {
+            // Ambos botones están presionados
+            // Realiza tus validaciones o acciones aquí
+            bluetoothControlListener?.enviarComandoBluetooth("G")
+        } else {
+            // Al menos uno de los botones no está presionado
+            // Realiza las acciones necesarias en caso de no cumplir la combinación
+        }
+    }
+
+    fun moveBackwardsLeft() {
+        if (isButton1Pressed && isButton2Pressed) {
+            // Ambos botones están presionados
+            // Realiza tus validaciones o acciones aquí
+            bluetoothControlListener?.enviarComandoBluetooth("H")
+        } else {
+            // Al menos uno de los botones no está presionado
+            // Realiza las acciones necesarias en caso de no cumplir la combinación
+        }
+    }
+    fun moveBackwardsRight() {
+        if (isButton1Pressed && isButton2Pressed) {
+            // Ambos botones están presionados
+            // Realiza tus validaciones o acciones aquí
+            bluetoothControlListener?.enviarComandoBluetooth("J")
+        } else {
+            // Al menos uno de los botones no está presionado
+            // Realiza las acciones necesarias en caso de no cumplir la combinación
+        }
+    }
+
 }
+
+
 
 
 
@@ -189,3 +269,90 @@ class ControllersFragment : Fragment() {
           Toast.makeText(context,"Error de conexión",Toast.LENGTH_LONG).show()
       }
   }*/
+
+
+
+
+/*button.setOnTouchListener { view, motionEvent ->
+when (motionEvent.action) {
+MotionEvent.ACTION_DOWN -> {
+    // Se presionó el botón
+    val data = "¡Hola, dispositivo Bluetooth!"
+    try {
+        val outputStream: OutputStream? = socket?.outputStream
+        outputStream?.write(data.toByteArray())
+    } catch (e: IOException) {
+        // Manejo de errores
+    }
+}
+MotionEvent.ACTION_UP -> {
+    // Se soltó el botón
+}
+}
+true
+}*/
+
+
+
+
+
+
+
+/*binding.hornActionButton.setOnClickListener {
+    buttonPressCount++
+    if (buttonPressCount == 1) {
+        val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.pressColor)
+        binding.hornActionButton.setBackgroundTintList(colorStateList)
+        bluetoothControlListener?.enviarComandoBluetooth("V")
+    } else if (buttonPressCount == 2) {
+        val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.white)
+        binding.hornActionButton.setBackgroundTintList(colorStateList)
+        bluetoothControlListener?.enviarComandoBluetooth("v")
+        buttonPressCount = 0
+    }
+}*/
+
+
+
+
+
+
+
+
+
+//BluetoothAdapter.getDefaultAdapter().getProfileConnectionState(BluetoothProfile.HEALTH) == BluetoothProfile.STATE_CONNECTED
+
+/*if(mbluetoothAdapter.getProfileConnectionState(BluetoothHeadset.HEADSET)== BluetoothAdapter.STATE_DISCONNECTED){
+    Toast.makeText(context,"Conectate",Toast.LENGTH_SHORT).show()
+}*/
+
+//bluetoothManager = BluetoothManager(requireContext(),this)
+//bluetoothManager.setListener(this)
+/*if(!bluetoothManager.isConnected){
+    binding.lightsActionButton.setOnClickListener {
+        Toast.makeText(context, "message", Toast.LENGTH_SHORT).show()
+    }
+
+    binding.hornActionButton.setOnClickListener {
+        Toast.makeText(context, "message", Toast.LENGTH_SHORT).show()
+        //bluetoothControlListener?.onCommandBluetooth("X")
+        //bluetoothManager.enviarComando("X")
+    }
+    binding.upActionButton.setOnClickListener {
+        //bluetoothControlListener?.onBluetoothDisconnected()
+        Toast.makeText(context, "message", Toast.LENGTH_SHORT).show()
+    }
+
+    binding.actionToPreviusControllerFragment.setOnClickListener {
+        activity?.apply {
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+    }
+
+    binding.actionToBluetoothControllerFragment.setOnClickListener {
+
+        activity?.apply {
+            it.findNavController().navigate(R.id.action_controllersFragment2_to_bluetoothFragment)
+        }
+    }
+}*/
