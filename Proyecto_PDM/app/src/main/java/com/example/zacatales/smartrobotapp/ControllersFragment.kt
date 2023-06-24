@@ -8,10 +8,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.zacatales.smartrobotapp.Bluetooth.*
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothConnectionListener
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
 import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdapter
@@ -33,6 +33,12 @@ class ControllersFragment : Fragment() {
     private lateinit var bluetoothAdapter: BluetoothAdapter
 
     private var buttonPressCount = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -119,6 +125,7 @@ class ControllersFragment : Fragment() {
 
 
 
+
         //BluetoothAdapter.getDefaultAdapter().getProfileConnectionState(BluetoothProfile.HEALTH) == BluetoothProfile.STATE_CONNECTED
 
         /*if(mbluetoothAdapter.getProfileConnectionState(BluetoothHeadset.HEADSET)== BluetoothAdapter.STATE_DISCONNECTED){
@@ -158,6 +165,8 @@ class ControllersFragment : Fragment() {
 
 
     }
+
+
 }
 
 
