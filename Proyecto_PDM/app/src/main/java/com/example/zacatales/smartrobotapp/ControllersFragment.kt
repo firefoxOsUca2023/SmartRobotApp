@@ -200,7 +200,6 @@ class ControllersFragment : Fragment() {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 // Inicio del seguimiento del SeekBar (cuando se toca)
                 manejarVelocidad(progress = 10)
-
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
@@ -256,34 +255,34 @@ class ControllersFragment : Fragment() {
     fun manejarVelocidad(progress: Int) {
         when(progress){
             10 ->{
-                bluetoothControlListener?.enviarComandoBluetooth("0")
-            }
-            20 ->{
                 bluetoothControlListener?.enviarComandoBluetooth("1")
             }
-            30 ->{
+            20 ->{
                 bluetoothControlListener?.enviarComandoBluetooth("2")
             }
-            40 ->{
+            30 ->{
                 bluetoothControlListener?.enviarComandoBluetooth("3")
             }
-            50 ->{
+            40 ->{
                 bluetoothControlListener?.enviarComandoBluetooth("4")
             }
-            60 ->{
+            50 ->{
                 bluetoothControlListener?.enviarComandoBluetooth("5")
             }
-            70 ->{
+            60 ->{
                 bluetoothControlListener?.enviarComandoBluetooth("6")
             }
-            80 ->{
+            70 ->{
                 bluetoothControlListener?.enviarComandoBluetooth("7")
             }
-            90 ->{
+            80 ->{
                 bluetoothControlListener?.enviarComandoBluetooth("8")
             }
-            100 ->{
+            90 ->{
                 bluetoothControlListener?.enviarComandoBluetooth("9")
+            }
+            100 ->{
+                bluetoothControlListener?.enviarComandoBluetooth("q")
             }
         }
     }
