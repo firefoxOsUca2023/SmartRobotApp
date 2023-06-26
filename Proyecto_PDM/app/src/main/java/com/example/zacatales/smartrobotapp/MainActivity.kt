@@ -26,25 +26,17 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
     private lateinit var binding: ActivityMainBinding
     private var btPermissions = false
     private lateinit var bluetoothManager: com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
-    //private lateinit var bluetoothManager: com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
-    //lateinit var bluetoothManager: com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
-
-    companion object{
-        var myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
-        var bluetoothSocket: BluetoothSocket?=null
-        var isConnected: Boolean = false
-    }
 
     override fun onResume() {
         super.onResume()
         bluetoothManager = com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager(this,this)
-        bluetoothManager.setListener(this)
+        bluetoothManager.setBluetoothStateListener(this)
     }
 
     override fun onPause() {
         super.onPause()
         bluetoothManager = com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager(this,this)
-        bluetoothManager.setListener(this)
+        bluetoothManager.setBluetoothStateListener(this)
 
     }
 
@@ -111,32 +103,32 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
     }
 
     override fun onBluetoothConnected(address: String) {
-            bluetoothManager.conectarDispositivo(address)
-        //showToast("CONECTADO CON EXITO")
+        bluetoothManager.conectarDispositivo(address)
         //Log.i("Exito","COnectado")
     }
-
     override fun enviarComandoBluetooth(comando: String) {
-            bluetoothManager.enviarComando(comando)
-
+        bluetoothManager.enviarComando(comando)
+        Log.i("Comannd","Enviado")
     }
-
     override fun onBluetoothConnectionError(error: String) {
-        //Log.i("Error","Falló la conexión")
+        Log.i("Error","Falló la conexión")
+        runOnUiThread {
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        }
         //Toast.makeText(this,error,Toast.LENGTH_LONG).show()
-        //showToast(error)
     }
 
     override fun onBluetoothDisconnected() {
-        //showToast("Desconectado")
+        //showToast("Conexión Bluetooth cerrada")
     }
 
-    private fun showToast(message: String) {
-        runOnUiThread {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    override fun State(state: Boolean) {
+        if(state){
+            runOnUiThread {
+                Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
+            }
         }
     }
-
 
 
 }

@@ -27,7 +27,7 @@ import com.example.zacatales.smartrobotapp.databinding.FragmentBluetoothBinding
 const val REQUEST_ENABLE_BT=1
 
 
-class BluetoothFragment : Fragment(), BluetoothConnectionListener{
+class BluetoothFragment : Fragment(){
 
     private lateinit var adapter: PairedListAdapter
     private lateinit var binding: FragmentBluetoothBinding
@@ -53,15 +53,6 @@ class BluetoothFragment : Fragment(), BluetoothConnectionListener{
     override fun onDetach() {
         super.onDetach()
         bluetoothControlListener=null
-    }
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bluetoothManager = BluetoothManager(requireContext(),this)
-        bluetoothManager.setListener(this)
-
     }
 
 
@@ -126,24 +117,7 @@ class BluetoothFragment : Fragment(), BluetoothConnectionListener{
         adapter.notifyDataSetChanged()
     }
 
-    override fun onBluetoothConnected(address: String) {
-        showToast("Exito")
-    }
 
-    override fun enviarComandoBluetooth(comando: String) {
-    }
-
-    override fun onBluetoothConnectionError(error: String) {
-    }
-
-    override fun onBluetoothDisconnected() {
-    }
-
-    private fun showToast(message: String) {
-        requireActivity().runOnUiThread {
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-        }
-    }
 
 
 }

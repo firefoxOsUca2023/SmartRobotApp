@@ -8,4 +8,5 @@ interface BluetoothConnectionListener {
     fun enviarComandoBluetooth(comando: String)
     fun onBluetoothConnectionError(error: String)
     fun onBluetoothDisconnected()
+    fun State(state: Boolean)
 }
