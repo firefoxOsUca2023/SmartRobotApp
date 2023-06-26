@@ -1,13 +1,17 @@
 package com.example.zacatales.smartrobotapp
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate.NightMode
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -99,11 +103,27 @@ class ControllersFragment : Fragment() {
                     binding.lightsActionButton.setBackgroundTintList(colorStateList)
                     bluetoothControlListener?.enviarComandoBluetooth("X")
                 } else if (buttonPressCount == 2) {
-                    val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.white)
+                    val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.btnColor
+                    )
                     binding.lightsActionButton.setBackgroundTintList(colorStateList)
                     bluetoothControlListener?.enviarComandoBluetooth("x")
                     buttonPressCount = 0
                 }
+                /*if(Configuration.UI_MODE_NIGHT_YES = true){
+
+                }else{
+                    if (buttonPressCount == 1) {
+                        val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.white)
+                        binding.lightsActionButton.setBackgroundTintList(colorStateList)
+                        bluetoothControlListener?.enviarComandoBluetooth("X")
+                    } else if (buttonPressCount == 2) {
+                        val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.hornPressButton)
+                        binding.lightsActionButton.setBackgroundTintList(colorStateList)
+                        bluetoothControlListener?.enviarComandoBluetooth("x")
+                        buttonPressCount = 0
+                    }
+                }*/
+
             }
 
             binding.hornActionButton.setOnClickListener {
@@ -164,7 +184,13 @@ class ControllersFragment : Fragment() {
         }*/
 
 
+
     }
+
+    /*private boolean nightmodeActive(){
+        int nightMode = getResources().g
+
+    }*/
 
 
 }

@@ -87,21 +87,19 @@
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/up_actionButton"
+                        style="@style/buttonColor"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_marginTop="80dp"
                         android:layout_marginStart="125dp"
+                        android:layout_marginTop="80dp"
                         android:background="@color/btnColor"
                         android:clickable="true"
                         android:contentDescription="Go forward"
                         android:src="@drawable/baseline_arrow_up_24"
                         app:background="@color/txtColor"
-                        style="@style/buttonColor"
                         app:borderWidth="@dimen/borderWidthBtn"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.491" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/left_actionButton"
@@ -190,10 +188,9 @@
                         android:clickable="true"
                         android:contentDescription="Turn on the lights"
                         android:src="@drawable/baseline_highlight"
+                        app:backgroundTint="@color/btnColor"
                         app:background="@color/txtColor"
-                        style="@style/buttonColor"
                         app:borderWidth="@dimen/borderWidthBtn"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/horn_actionButton"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/horn_actionButton"

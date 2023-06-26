@@ -57,7 +57,7 @@
                             android:layout_marginStart="@dimen/maxGap"
                             android:layout_marginEnd="@dimen/maxGap"
                             android:layout_marginBottom="@dimen/marginBottonRobotimy"
-                            android:src="@drawable/robotimy"/>
+                            android:src="@drawable/robotnpng"/>
 
                     </LinearLayout>
 
