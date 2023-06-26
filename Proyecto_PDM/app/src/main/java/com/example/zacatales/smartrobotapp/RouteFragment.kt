@@ -21,7 +21,7 @@ class RouteFragment : Fragment() {
    private lateinit var btnToDelete: FloatingActionButton
     private val viewModel: RobotViewModel by activityViewModels()
     private lateinit var routeView: RouteView
-
+    private lateinit var deleteButton: FloatingActionButton
 
 
 
@@ -62,6 +62,7 @@ class RouteFragment : Fragment() {
             activity?.apply {
                 //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 it.findNavController().navigate(R.id.action_routeFragment_to_confimationDeleteFragment)
+                routeView.clearRoute()
             }
         }
     }
