@@ -6,12 +6,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.zacatales.smartrobotapp.view.RouteView
+import com.example.zacatales.smartrobotapp.viewmodel.RobotViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class RouteFragment : Fragment() {
    private lateinit var btnToBack: FloatingActionButton
    private lateinit var btnToDelete: FloatingActionButton
+    private val viewModel: RobotViewModel by activityViewModels()
+    private lateinit var routeView: RouteView
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +42,14 @@ class RouteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        routeView = view.findViewById(R.id.routeView)
+
+        viewModel.clicks.observe(viewLifecycleOwner, { clicks ->
+            routeView.setRouteList(clicks)
+
+        })
         bind()
+
         btnToBack.setOnClickListener {
             activity?.apply {
                 //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE

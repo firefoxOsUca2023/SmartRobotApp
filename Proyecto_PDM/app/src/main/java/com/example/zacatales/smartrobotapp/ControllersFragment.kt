@@ -12,11 +12,14 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothConnectionListener
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
 import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdapter
 import com.example.zacatales.smartrobotapp.databinding.FragmentControllersBinding
+import com.example.zacatales.smartrobotapp.viewmodel.RobotViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -33,6 +36,10 @@ class ControllersFragment : Fragment() {
     private var bluetoothControlListener: BluetoothConnectionListener? = null
     private lateinit var bluetoothAdapter: BluetoothAdapter
     private lateinit var seekBar: SeekBar
+    private lateinit var routeButton: FloatingActionButton
+    private val viewModel: RobotViewModel by activityViewModels()
+
+
 
     private var buttonPressCount = 0
     var isButton1Pressed = false
@@ -80,8 +87,14 @@ class ControllersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+            routeButton = binding.actionToRouteControllerFragment
+            routeButton.setOnClickListener {
+                it.findNavController().navigate(R.id.action_controllersFragment2_to_routeFragment)
+            }
 
-            //    int orientation = yourActivityName.this.getResources().getConfiguration().orientation;
+
+
+        //    int orientation = yourActivityName.this.getResources().getConfiguration().orientation;
             binding.actionToPreviusControllerFragment.setOnClickListener {
                 activity?.apply {
                     activity?.onBackPressedDispatcher?.onBackPressed()
@@ -128,7 +141,9 @@ class ControllersFragment : Fragment() {
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
                     isButton1Pressed = true
+                    viewModel.addClick("F")
                     bluetoothControlListener?.enviarComandoBluetooth("F")
+
                     moveForwardRight()
                     //moveForwardLeft()
                 }
@@ -145,6 +160,7 @@ class ControllersFragment : Fragment() {
         binding.rightActionButton.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    viewModel.addClick("R")
                     bluetoothControlListener?.enviarComandoBluetooth("R")
                     isButton2Pressed = true
                     moveForwardRight()
@@ -161,6 +177,7 @@ class ControllersFragment : Fragment() {
         binding.leftActionButton.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    viewModel.addClick("L")
                     bluetoothControlListener?.enviarComandoBluetooth("L")
                     isButton2Pressed = true
                     moveForwardLeft()
@@ -177,6 +194,7 @@ class ControllersFragment : Fragment() {
         binding.backActionButton.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    viewModel.addClick("B")
                     bluetoothControlListener?.enviarComandoBluetooth("B")
                     isButton2Pressed = true
                     moveBackwardsLeft()
@@ -192,6 +210,9 @@ class ControllersFragment : Fragment() {
             true
         }
 
+
+
+
     }
     fun moveForwardRight() {
         if (isButton1Pressed && isButton2Pressed) {
@@ -203,6 +224,7 @@ class ControllersFragment : Fragment() {
             // Realiza las acciones necesarias en caso de no cumplir la combinación
         }
     }
+
 
     fun moveForwardLeft() {
         if (isButton1Pressed && isButton2Pressed) {
