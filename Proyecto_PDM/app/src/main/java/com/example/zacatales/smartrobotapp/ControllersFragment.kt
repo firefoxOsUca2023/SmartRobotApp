@@ -37,6 +37,7 @@ class ControllersFragment : Fragment() {
     private lateinit var bluetoothAdapter: BluetoothAdapter
 
     private var buttonPressCount = 0
+    private var buttonPressCount2 = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,21 +98,9 @@ class ControllersFragment : Fragment() {
             }
 
             binding.lightsActionButton.setOnClickListener {
-                buttonPressCount++
-                if (buttonPressCount == 1) {
-                    val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.pressColor)
-                    binding.lightsActionButton.setBackgroundTintList(colorStateList)
-                    bluetoothControlListener?.enviarComandoBluetooth("X")
-                } else if (buttonPressCount == 2) {
-                    val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.btnColor
-                    )
-                    binding.lightsActionButton.setBackgroundTintList(colorStateList)
-                    bluetoothControlListener?.enviarComandoBluetooth("x")
-                    buttonPressCount = 0
-                }
-                /*if(Configuration.UI_MODE_NIGHT_YES = true){
-
-                }else{
+                val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+                if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
+                    buttonPressCount++
                     if (buttonPressCount == 1) {
                         val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.white)
                         binding.lightsActionButton.setBackgroundTintList(colorStateList)
@@ -122,8 +111,22 @@ class ControllersFragment : Fragment() {
                         bluetoothControlListener?.enviarComandoBluetooth("x")
                         buttonPressCount = 0
                     }
-                }*/
 
+
+                } else {
+                    buttonPressCount2++
+                    if (buttonPressCount2 == 1) {
+                        val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.pressColor)
+                        binding.lightsActionButton.setBackgroundTintList(colorStateList)
+                        bluetoothControlListener?.enviarComandoBluetooth("X")
+                    } else if (buttonPressCount2 == 2) {
+                        val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.btnColor
+                        )
+                        binding.lightsActionButton.setBackgroundTintList(colorStateList)
+                        bluetoothControlListener?.enviarComandoBluetooth("x")
+                        buttonPressCount2 = 0
+                    }
+                }
             }
 
             binding.hornActionButton.setOnClickListener {
