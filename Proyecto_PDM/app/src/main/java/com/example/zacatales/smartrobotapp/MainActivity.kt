@@ -7,14 +7,25 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothConnectionListener
 import com.example.zacatales.smartrobotapp.Bluetooth.model.PairedDevicesInfo
 import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdapter
@@ -29,23 +40,32 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
     private lateinit var bluetoothManager: com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
     //private lateinit var bluetoothManager: com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
     //lateinit var bluetoothManager: com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
+    private val hideNavigationBarDelayMillis: Long = 2500
+    private val handler = Handler()
+    private val hideNavigationBarRunnable = Runnable { hideNavigationBar() }
 
     companion object{
         var myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
         var bluetoothSocket: BluetoothSocket?=null
         var isConnected: Boolean = false
+
     }
 
     override fun onResume() {
         super.onResume()
         bluetoothManager = com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager(this,this)
         bluetoothManager.setListener(this)
+
+        hideNavigationBar()
+
     }
 
     override fun onPause() {
         super.onPause()
         bluetoothManager = com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager(this,this)
         bluetoothManager.setListener(this)
+
+        handler.removeCallbacks(hideNavigationBarRunnable)
 
     }
 
@@ -72,11 +92,7 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
             }
         }
 
-
-        window.decorView.apply {
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-        }
-
+        hideNavigationBar()
 
     }
 
@@ -140,6 +156,19 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
         }
     }
 
+    private fun hideNavigationBar() {
+        window.decorView.apply {
+            systemUiVisibility = (
+                    View.SYSTEM_UI_FLAG_IMMERSIVE
+                            or View.SYSTEM_UI_FLAG_FULLSCREEN
+                            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    )
+        }
 
-
+        handler.removeCallbacks(hideNavigationBarRunnable)
+        handler.postDelayed(hideNavigationBarRunnable, hideNavigationBarDelayMillis)
+    }
 }
