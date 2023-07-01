@@ -106,7 +106,6 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
                 can()
             }else {
                 //can()
-
             }
         }else {
             btPermissions=false
@@ -117,7 +116,7 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
     ){
             result : ActivityResult ->
         if (result.resultCode == RESULT_OK){
-            can()
+            //can()
         }
     }
 

@@ -75,10 +75,7 @@ class BluetoothManager(private val context: Context, private var listener: Bluet
     }
 
     fun enviarComando(comando: String) {
-        if(bluetoothSocket==null){
-            val error = "Conecte su dispositivo a bluetooth"
-            listener.onBluetoothConnectionError(error)
-        }else{
+        if(bluetoothSocket!=null){
             if (outputStream != null) {
                 try {
                     outputStream?.write(comando.toByteArray())
@@ -89,6 +86,9 @@ class BluetoothManager(private val context: Context, private var listener: Bluet
                     //listener.onBluetoothConnectionError(error)
                 }
             }
+        }else{
+            val error = "Conecte su dispositivo a bluetooth"
+            listener.onBluetoothConnectionError(error)
         }
     }
     fun desconectarDispositivo() {
