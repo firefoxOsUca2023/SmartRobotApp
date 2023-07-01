@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:cardCornerRadius="2dp"
-        app:cardBackgroundColor="@color/CardDevice"
+        style="@style/cardColor"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +28,7 @@
                 android:layout_marginStart="30dp"
                 android:contentDescription="NameDevice"
                 android:fontFamily="@font/mali_light"
-                android:textColor="@color/txtColor"
+                style="@style/textColor"
                 android:gravity="center_vertical"
                 android:text="@string/name_bluetoothDevice"
                 android:textSize="20sp"
@@ -43,11 +43,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="25sp"
                 android:contentDescription="Connect"
-
                 android:fontFamily="@font/mali_light"
                 android:gravity="center_vertical"
                 android:text="@string/status_device"
-                android:textColor="@color/txtColor"
+                style="@style/textColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

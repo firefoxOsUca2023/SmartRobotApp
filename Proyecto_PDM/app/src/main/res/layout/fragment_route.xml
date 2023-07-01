@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RouteFragment">
+    tools:context=".RouteFragment"
+    style="@style/backgroundTheme">
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,7 +19,7 @@
         android:contentDescription="Back to controller"
         android:src="@drawable/baseline_arrow_back_24"
         app:background="@color/txtColor"
-        app:backgroundTint="@color/btnColor"
+        style="@style/buttonColor"
         app:borderWidth="@dimen/borderWidthBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,11 +35,10 @@
         android:contentDescription="Delete route"
         android:src="@drawable/baseline_delete_24"
         app:background="@color/txtColor"
-        app:backgroundTint="@color/btnColor"
+        style="@style/buttonColor"
         app:borderWidth="@dimen/borderWidthBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -62,7 +62,6 @@
         </HorizontalScrollView>
     </ScrollView>
 
-
     <TextView
         android:id="@+id/textViewNameAppController"
         android:layout_width="@dimen/nullGap"
@@ -72,7 +71,7 @@
         android:layout_marginBottom="@dimen/maxGap"
         android:gravity="center"
         android:text="@string/NameApp"
-        android:textColor="@color/txtColor"
+        style="@style/textColor"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

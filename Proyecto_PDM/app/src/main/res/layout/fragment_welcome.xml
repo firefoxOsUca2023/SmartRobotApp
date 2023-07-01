@@ -9,7 +9,8 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            style="@style/backgroundTheme">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -35,7 +36,7 @@
                             android:gravity="center"
                             android:layout_gravity="center"
                             android:text="@string/textTitleMain"
-                            android:textColor="@color/txtColor"
+                            style="@style/textColor"
                             android:textSize="@dimen/titleSize"
                             android:textStyle="bold"
                             />
@@ -56,7 +57,7 @@
                             android:layout_marginStart="@dimen/maxGap"
                             android:layout_marginEnd="@dimen/maxGap"
                             android:layout_marginBottom="@dimen/marginBottonRobotimy"
-                            android:src="@drawable/robotimy"/>
+                            android:src="@drawable/robotnpng"/>
 
                     </LinearLayout>
 
@@ -73,7 +74,7 @@
                     android:fontFamily="@font/mali_light"
                     android:gravity="center"
                     android:text="@string/NameApp"
-                    android:textColor="@color/txtColor"
+                    style="@style/textColor"
                     android:textSize="@dimen/appNameSize"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -93,7 +94,7 @@
                     android:clickable="true"
                     android:contentDescription="@string/actionMoveToControllers"
                     android:src="@drawable/baseline_gamepad_24"
-                    app:backgroundTint="@color/btnColor"
+                    style="@style/buttonColor"
                     app:borderWidth="@dimen/borderWidthBtn"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
@@ -109,7 +110,7 @@
                     android:contentDescription="@string/actionMoveToBluetooth"
                     android:src="@android:drawable/stat_sys_data_bluetooth"
                     app:background="@color/txtColor"
-                    app:backgroundTint="@color/btnColor"
+                    style="@style/buttonColor"
                     app:borderWidth="@dimen/borderWidthBtn"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
