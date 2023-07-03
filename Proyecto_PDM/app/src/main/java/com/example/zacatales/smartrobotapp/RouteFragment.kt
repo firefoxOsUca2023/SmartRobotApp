@@ -12,23 +12,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.zacatales.smartrobotapp.databinding.FragmentRouteBinding
 import com.example.zacatales.smartrobotapp.view.RouteView
 import com.example.zacatales.smartrobotapp.viewmodel.RobotViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class RouteFragment : Fragment() {
-   private lateinit var btnToBack: FloatingActionButton
-   private lateinit var btnToDelete: FloatingActionButton
+
     private val viewModel: RobotViewModel by activityViewModels()
     private lateinit var routeView: RouteView
-    private lateinit var deleteButton: FloatingActionButton
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private lateinit var binding: FragmentRouteBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,20 +30,18 @@ class RouteFragment : Fragment() {
         activity?.apply {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
-        return inflater.inflate(R.layout.fragment_route, container, false)
+        binding = FragmentRouteBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         routeView = view.findViewById(R.id.routeView)
-
         viewModel.clicks.observe(viewLifecycleOwner, { clicks ->
             routeView.setRouteList(clicks)
-
         })
-        bind()
 
-        btnToBack.setOnClickListener {
+        binding.actionToPreviusRouteFragment.setOnClickListener {
             activity?.apply {
                 //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 activity?.apply {
@@ -58,7 +49,7 @@ class RouteFragment : Fragment() {
                 }
             }
         }
-        btnToDelete.setOnClickListener {
+        binding.actionDeleteRoute.setOnClickListener {
             activity?.apply {
                 //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 viewModel.clicks.observe(viewLifecycleOwner,{clicks ->
@@ -66,10 +57,5 @@ class RouteFragment : Fragment() {
                 })
             }
         }
-    }
-
-    fun bind(){
-        btnToBack = view?.findViewById(R.id.action_to_previus_routeFragment) as FloatingActionButton
-        btnToDelete = view?.findViewById(R.id.action_deleteRoute) as FloatingActionButton
     }
 }

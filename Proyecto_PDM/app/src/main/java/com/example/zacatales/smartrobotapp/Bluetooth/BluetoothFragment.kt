@@ -31,7 +31,6 @@ class BluetoothFragment : Fragment(){
 
     private lateinit var adapter: PairedListAdapter
     private lateinit var binding: FragmentBluetoothBinding
-    lateinit var mbluetoothAdapter: BluetoothAdapter
     private lateinit var bluetoothManager: BluetoothManager
     private var bluetoothControlListener: BluetoothConnectionListener? = null
 
@@ -96,8 +95,6 @@ class BluetoothFragment : Fragment(){
         adapter = PairedListAdapter{
                 selectedDevice ->
             showSelectedItem(selectedDevice)
-            //bluetoothManager.conectarDispositivo(selectedDevice.macAddress)
-            //Toast.makeText(context,selectedDevice.macAddress,Toast.LENGTH_LONG).show()
             bluetoothControlListener?.onBluetoothConnected(selectedDevice.macAddress)
 
         }
@@ -116,10 +113,6 @@ class BluetoothFragment : Fragment(){
         adapter.setData(deviceViewModel.getDevices())
         adapter.notifyDataSetChanged()
     }
-
-
-
-
 }
 
 

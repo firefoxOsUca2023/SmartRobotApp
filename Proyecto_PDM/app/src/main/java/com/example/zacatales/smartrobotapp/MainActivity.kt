@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothConnectionListener
+import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothStateListener
 import com.example.zacatales.smartrobotapp.Bluetooth.model.PairedDevicesInfo
 import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdapter
 import com.example.zacatales.smartrobotapp.Bluetooth.viewmodel.DeviceViewModel
@@ -34,20 +35,14 @@ import com.example.zacatales.smartrobotapp.databinding.ActivityMainBinding
 import java.io.IOException
 import java.util.UUID
 
-class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
+class MainActivity : AppCompatActivity(),BluetoothConnectionListener,BluetoothStateListener {
     private lateinit var binding: ActivityMainBinding
     private var btPermissions = false
+    private var bluetoothStateListener: BluetoothStateListener? = null
     private lateinit var bluetoothManager: com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
     private val hideNavigationBarDelayMillis: Long = 2500
     private val handler = Handler()
     private val hideNavigationBarRunnable = Runnable { hideNavigationBar() }
-
-    companion object{
-        var myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
-        var bluetoothSocket: BluetoothSocket?=null
-        var isConnected: Boolean = false
-
-    }
 
     override fun onResume() {
         super.onResume()
@@ -60,7 +55,6 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
         super.onPause()
         bluetoothManager = com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager(this,this)
         bluetoothManager.setBluetoothStateListener(this)
-
         handler.removeCallbacks(hideNavigationBarRunnable)
 
     }
@@ -70,10 +64,6 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
         super.onCreate(savedInstanceState)
         binding= DataBindingUtil.
         setContentView(this,R.layout.activity_main)
-        //val mac = "98:D3:71:F5:B3:2A"
-
-        //val segundoFragmento = ControllersFragment.newInstance(bluetoothManager)
-
         val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
         val bluetoothAdapter: BluetoothAdapter = bluetoothManager.adapter
         if(bluetoothAdapter==null){
@@ -103,9 +93,8 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
             if(bluetoothAdapter?.isEnabled==false){
                 val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 btActivityResultLauncher.launch(enableBtIntent)
-                can()
+
             }else {
-                //can()
             }
         }else {
             btPermissions=false
@@ -116,7 +105,7 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
     ){
             result : ActivityResult ->
         if (result.resultCode == RESULT_OK){
-            //can()
+            can()
         }
     }
 
@@ -147,9 +136,17 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
     override fun State(state: Boolean) {
         if(state){
             runOnUiThread {
-                Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Conexión exitosa", Toast.LENGTH_SHORT).show()
             }
         }
+        bluetoothStateListener?.onBluetoothStateChanged(state)
+    }
+
+    override fun onBluetoothStateChanged(state: Boolean) {
+
+    }
+    fun setBluetoothStateListener(listener: BluetoothStateListener) {
+        bluetoothStateListener = listener
     }
 
     private fun hideNavigationBar() {
@@ -163,8 +160,8 @@ class MainActivity : AppCompatActivity(),BluetoothConnectionListener {
                             or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     )
         }
-
         handler.removeCallbacks(hideNavigationBarRunnable)
         handler.postDelayed(hideNavigationBarRunnable, hideNavigationBarDelayMillis)
     }
+
 }

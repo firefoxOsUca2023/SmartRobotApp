@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -18,40 +19,26 @@ import androidx.navigation.findNavController
 import com.example.zacatales.smartrobotapp.Bluetooth.*
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothConnectionListener
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
+import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothStateListener
 import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdapter
 import com.example.zacatales.smartrobotapp.databinding.FragmentControllersBinding
 import com.example.zacatales.smartrobotapp.viewmodel.RobotViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class ControllersFragment : Fragment() {
+class ControllersFragment : Fragment(), BluetoothStateListener {
 
-    private lateinit var btnToBack: FloatingActionButton
-    private lateinit var btnToBluetooth: FloatingActionButton
-    private lateinit var btnToRoute: FloatingActionButton
-    lateinit var mbluetoothAdapter: BluetoothAdapter
-    private lateinit var horn: FloatingActionButton
     private lateinit var binding: FragmentControllersBinding
-    private lateinit var adapter: PairedListAdapter
     private lateinit var bluetoothManager: BluetoothManager
     private var bluetoothControlListener: BluetoothConnectionListener? = null
-    private lateinit var bluetoothAdapter: BluetoothAdapter
-    private lateinit var seekBar: SeekBar
     private lateinit var routeButton: FloatingActionButton
     private val viewModel: RobotViewModel by activityViewModels()
-
 
     private var buttonPressCount = 0
     private var buttonPressCount2 = 0
 
     var isButton1Pressed = false
     var isButton2Pressed = false
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -82,6 +69,7 @@ class ControllersFragment : Fragment() {
         activity?.apply {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
+
         // Resto del código del fragmento
         // ...
         binding = FragmentControllersBinding.inflate(inflater, container, false)
@@ -93,6 +81,7 @@ class ControllersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        (activity as? MainActivity)?.setBluetoothStateListener(this)
         routeButton = binding.actionToRouteControllerFragment
         routeButton.setOnClickListener {
             it.findNavController().navigate(R.id.action_controllersFragment2_to_routeFragment)
@@ -364,9 +353,6 @@ class ControllersFragment : Fragment() {
             // Ambos botones están presionados
             // Realiza tus validaciones o acciones aquí
             bluetoothControlListener?.enviarComandoBluetooth("I")
-        } else {
-            // Al menos uno de los botones no está presionado
-            // Realiza las acciones necesarias en caso de no cumplir la combinación
         }
     }
 
@@ -375,9 +361,6 @@ class ControllersFragment : Fragment() {
             // Ambos botones están presionados
             // Realiza tus validaciones o acciones aquí
             bluetoothControlListener?.enviarComandoBluetooth("G")
-        } else {
-            // Al menos uno de los botones no está presionado
-            // Realiza las acciones necesarias en caso de no cumplir la combinación
         }
     }
 
@@ -386,9 +369,6 @@ class ControllersFragment : Fragment() {
             // Ambos botones están presionados
             // Realiza tus validaciones o acciones aquí
             bluetoothControlListener?.enviarComandoBluetooth("H")
-        } else {
-            // Al menos uno de los botones no está presionado
-            // Realiza las acciones necesarias en caso de no cumplir la combinación
         }
     }
 
@@ -397,9 +377,6 @@ class ControllersFragment : Fragment() {
             // Ambos botones están presionados
             // Realiza tus validaciones o acciones aquí
             bluetoothControlListener?.enviarComandoBluetooth("J")
-        } else {
-            // Al menos uno de los botones no está presionado
-            // Realiza las acciones necesarias en caso de no cumplir la combinación
         }
     }
 
@@ -446,4 +423,14 @@ class ControllersFragment : Fragment() {
             }
         }
     }
+
+    override fun onBluetoothStateChanged(state: Boolean) {
+        if(state){
+            Log.i("eee","JEEJJEEJEJ")
+        }
+        else{
+            Log.i("l","LOL")
+        }
+    }
+
 }
