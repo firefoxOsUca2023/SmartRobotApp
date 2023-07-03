@@ -73,4 +73,4 @@
 
 ![controllers](controllersTab.png)
 
-repository link[Markdown Live Preview](https://github.com/firefoxOsUca2023/SmartRobotApp.git).
+repository link [https://github.com/firefoxOsUca2023/SmartRobotApp.git].
