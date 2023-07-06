@@ -1,6 +1,6 @@
 # SmartRobotApp 
 
-![Robotimy](Robotimy.jpeg)
+![Robotimy](./images/Robotimy.jpeg)
 
 
 #### Steps
@@ -12,7 +12,7 @@
 
 ### Welcome 
 
-![welcome](welcome.png)
+![welcome](./images/1.png)
 
 1. Name app
 2. Button to bluetooth
@@ -21,7 +21,7 @@
 
 ### Bluetooth
 
-![bluetooth](bluetooth.png)
+![bluetooth](./images/2.png)
 
 1. Name app
 2. Button to back
@@ -30,7 +30,7 @@
 
 ### Controllers 
 
-![controllers](controllers.png)
+![controllers](./images/3.png)
 
 1. Name app
 2. Button to back
@@ -49,28 +49,28 @@
 
 ### Welcome 
 
-![welcome](welcomeNigth.jpg)
+![welcome](./images/welcomeNigth.jpg)
 
 ### Bluetooth
 
-![bluetooth](bluetoothNigth.jpg)
+![bluetooth](./images/bluetoothNigth.jpg)
 
 ### Controllers 
 
-![controllers](controllersNigth.jpg)
+![controllers](./images/controllersNigth.jpg)
 
 ## Tablet design
 
 ### Welcome 
 
-![welcome](welcomeTab.png)
+![welcome](./images/welcomeTab.png)
 
 ### Bluetooth
 
-![bluetooth](bluetoothTab.png)
+![bluetooth](./images/bluetoothTab.png)
 
 ### Controllers 
 
-![controllers](controllersTab.png)
+![controllers](./images/controllersTab.png)
 
 repository link [https://github.com/firefoxOsUca2023/SmartRobotApp.git].
