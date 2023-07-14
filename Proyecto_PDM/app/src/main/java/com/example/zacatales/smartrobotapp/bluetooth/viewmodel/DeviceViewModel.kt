@@ -1,21 +1,14 @@
-package com.example.zacatales.smartrobotapp.Bluetooth.viewmodel
+package com.example.zacatales.smartrobotapp.bluetooth.viewmodel
 
 
-import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothSocket
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.zacatales.smartrobotapp.Bluetooth.model.PairedDevicesInfo
+import com.example.zacatales.smartrobotapp.bluetooth.model.PairedDevicesInfo
 import com.example.zacatales.smartrobotapp.DeviceReviewerApplication
-import com.example.zacatales.smartrobotapp.Bluetooth.repositories.DeviceRepository
-import com.example.zacatales.smartrobotapp.MainActivity
-import java.io.IOException
-import java.sql.Connection
-import java.util.UUID
+import com.example.zacatales.smartrobotapp.bluetooth.repositories.DeviceRepository
 
 
 class DeviceViewModel(private val repository: DeviceRepository): ViewModel() {

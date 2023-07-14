@@ -34,3 +34,5 @@ class RobotViewModel : ViewModel() {
         _isClearedFromRoute.value = true
     }
 }
+
+

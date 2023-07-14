@@ -7,6 +7,7 @@
     <color name="pressColor">#FF9D9D</color>
     <color name="CardDevice">#B9E3E6EC</color>
     <color name="hornPressButton">#FFEB3B</color>
+    <color name="seekBarColor">#FFDFDF</color>
 
     <color name="primary">#F1B7B7</color>
 

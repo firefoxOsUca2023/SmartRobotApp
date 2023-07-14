@@ -3,8 +3,8 @@ package com.example.zacatales.smartrobotapp
 import android.annotation.SuppressLint
 import android.app.Application
 import android.bluetooth.BluetoothAdapter
-import com.example.zacatales.smartrobotapp.Bluetooth.model.PairedDevicesInfo
-import com.example.zacatales.smartrobotapp.Bluetooth.repositories.DeviceRepository
+import com.example.zacatales.smartrobotapp.bluetooth.model.PairedDevicesInfo
+import com.example.zacatales.smartrobotapp.bluetooth.repositories.DeviceRepository
 
 @SuppressLint("MissingPermission")
 class DeviceReviewerApplication:Application() {

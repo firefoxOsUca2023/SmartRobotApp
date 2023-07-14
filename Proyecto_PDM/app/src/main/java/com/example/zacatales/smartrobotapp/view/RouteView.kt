@@ -6,10 +6,10 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
+import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
-import android.view.GestureDetector
 import com.example.zacatales.smartrobotapp.model.BotonPresionado
 
 
@@ -232,3 +232,4 @@ class RouteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     }
 
 }
+
