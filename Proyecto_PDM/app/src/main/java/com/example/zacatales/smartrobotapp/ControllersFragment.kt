@@ -88,9 +88,13 @@ class ControllersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //mbluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
             routeButton = binding.actionToRouteControllerFragment
-            routeButton.setOnClickListener {
-                it.findNavController().navigate(R.id.action_controllersFragment2_to_routeFragment)
+        routeButton.setOnClickListener {
+            it.findNavController().navigate(R.id.action_controllersFragment2_to_routeFragment)
+            // Verificamos si los clicks se borraron en RouteView
+            if(viewModel.isClearedFromRoute.value == true) {
+                viewModel.clearClicks()
             }
+        }
 
 
 

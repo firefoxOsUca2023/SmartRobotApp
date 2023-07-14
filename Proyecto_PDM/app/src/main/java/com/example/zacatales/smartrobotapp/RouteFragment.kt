@@ -63,8 +63,11 @@ class RouteFragment : Fragment() {
                 //requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 it.findNavController().navigate(R.id.action_routeFragment_to_confimationDeleteFragment)
                 routeView.clearRoute()
+                // Aquí indicamos que se han borrado los datos de RouteView
+                viewModel.setClicksClearedFromRoute()
             }
         }
+
     }
 
     fun bind(){
