@@ -19,6 +19,7 @@ import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothConnec
 import com.example.zacatales.smartrobotapp.Bluetooth.`interface`.BluetoothManager
 import com.example.zacatales.smartrobotapp.Bluetooth.recyclerview.PairedListAdapter
 import com.example.zacatales.smartrobotapp.databinding.FragmentControllersBinding
+import com.example.zacatales.smartrobotapp.model.BotonPresionado
 import com.example.zacatales.smartrobotapp.viewmodel.RobotViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -38,6 +39,8 @@ class ControllersFragment : Fragment() {
     private lateinit var seekBar: SeekBar
     private lateinit var routeButton: FloatingActionButton
     private val viewModel: RobotViewModel by activityViewModels()
+    private var pressStartTime: Long = 0
+
 
 
 
@@ -76,8 +79,7 @@ class ControllersFragment : Fragment() {
         activity?.apply {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
-        // Resto del código del fragmento
-        // ...
+
         binding = FragmentControllersBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -145,14 +147,16 @@ class ControllersFragment : Fragment() {
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
                     isButton1Pressed = true
-                    viewModel.addClick("F")
+                    pressStartTime = System.currentTimeMillis()
                     bluetoothControlListener?.enviarComandoBluetooth("F")
-
                     moveForwardRight()
                     //moveForwardLeft()
                 }
                 MotionEvent.ACTION_UP -> {
                     bluetoothControlListener?.enviarComandoBluetooth("S")
+                    val pressDuration = System.currentTimeMillis() - pressStartTime
+                    val botonPresionado = BotonPresionado("F",pressDuration)
+                    viewModel.addClick(botonPresionado)
                     isButton1Pressed = false
                     moveForwardRight()
                     //moveForwardLeft()
@@ -160,17 +164,19 @@ class ControllersFragment : Fragment() {
             }
             true
         }
-
         binding.rightActionButton.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    viewModel.addClick("R")
-                    bluetoothControlListener?.enviarComandoBluetooth("R")
                     isButton2Pressed = true
+                    pressStartTime = System.currentTimeMillis()
+                    bluetoothControlListener?.enviarComandoBluetooth("R")
                     moveForwardRight()
                 }
                 MotionEvent.ACTION_UP -> {
                     bluetoothControlListener?.enviarComandoBluetooth("S")
+                    val pressDuration = System.currentTimeMillis() - pressStartTime
+                    val botonPresionado = BotonPresionado("R", pressDuration)
+                    viewModel.addClick(botonPresionado)
                     isButton2Pressed = false
                     moveForwardRight()
                 }
@@ -181,13 +187,16 @@ class ControllersFragment : Fragment() {
         binding.leftActionButton.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    viewModel.addClick("L")
-                    bluetoothControlListener?.enviarComandoBluetooth("L")
                     isButton2Pressed = true
+                    pressStartTime = System.currentTimeMillis()
+                    bluetoothControlListener?.enviarComandoBluetooth("L")
                     moveForwardLeft()
                 }
                 MotionEvent.ACTION_UP -> {
                     bluetoothControlListener?.enviarComandoBluetooth("S")
+                    val pressDuration = System.currentTimeMillis() - pressStartTime
+                    val botonPresionado = BotonPresionado("L", pressDuration)
+                    viewModel.addClick(botonPresionado)
                     isButton2Pressed = false
                     moveForwardLeft()
                 }
@@ -198,14 +207,17 @@ class ControllersFragment : Fragment() {
         binding.backActionButton.setOnTouchListener { view, motionEvent ->
             when (motionEvent.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    viewModel.addClick("B")
-                    bluetoothControlListener?.enviarComandoBluetooth("B")
                     isButton2Pressed = true
+                    pressStartTime = System.currentTimeMillis()
+                    bluetoothControlListener?.enviarComandoBluetooth("B")
                     moveBackwardsLeft()
                     moveBackwardsRight()
                 }
                 MotionEvent.ACTION_UP -> {
                     bluetoothControlListener?.enviarComandoBluetooth("S")
+                    val pressDuration = System.currentTimeMillis() - pressStartTime
+                    val botonPresionado = BotonPresionado("B", pressDuration)
+                    viewModel.addClick(botonPresionado)
                     isButton2Pressed = false
                     moveBackwardsLeft()
                     moveBackwardsRight()
@@ -213,6 +225,9 @@ class ControllersFragment : Fragment() {
             }
             true
         }
+
+
+
 
 
 

@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.GestureDetector
+import com.example.zacatales.smartrobotapp.model.BotonPresionado
 
 
 class RouteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
@@ -31,7 +32,8 @@ class RouteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     private val scaleGestureDetector: ScaleGestureDetector
 
 
-    private var routeList: List<String> = emptyList()
+    private var routeList: List<BotonPresionado> = emptyList()
+
 
     private var lastTouchX = 0f
     private var lastTouchY = 0f
@@ -57,7 +59,7 @@ class RouteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         })
     }
 
-    fun setRouteList(routeList: List<String>) {
+    fun setRouteList(routeList: List<BotonPresionado>) {
         this.routeList = routeList
         invalidate() // Vuelve a dibujar la vista cuando cambia la lista de rutas
     }
@@ -70,8 +72,8 @@ class RouteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         var currentX = 0f
         var currentY = 0f
 
-        routeList.forEach { route ->
-            when (route) {
+        routeList.forEach {  buttonPress ->
+            when ( buttonPress.accion) {
                 "F" -> {
                     // Aumentar la altura
                     currentY += 100f
@@ -142,57 +144,59 @@ class RouteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
 
         routeList.forEach { route ->
-            when (route) {
+            val pressDurationFactor = route.duracion.toFloat() / 10
+            when (route.accion) {
                 "F" -> {
                     // Dibujar flecha hacia arriba
-                    canvas.drawLine(currentX, currentY, currentX, currentY - 100f, pathPaint)
+                    canvas.drawLine(currentX, currentY, currentX, currentY - pressDurationFactor, pathPaint)
                     arrowPath.reset()
-                    arrowPath.moveTo(currentX, currentY - 100f)
-                    arrowPath.lineTo(currentX - 10f, currentY - 80f)
-                    arrowPath.lineTo(currentX + 10f, currentY - 80f)
+                    arrowPath.moveTo(currentX, currentY - pressDurationFactor)
+                    arrowPath.lineTo(currentX - 10f, currentY - (pressDurationFactor - 20f))
+                    arrowPath.lineTo(currentX + 10f, currentY - (pressDurationFactor - 20f))
                     arrowPath.close()
                     canvas.drawPath(arrowPath, arrowPaint)
 
-                    currentY -= 100f
+                    currentY -= pressDurationFactor
                 }
                 "B" -> {
                     // Dibujar flecha hacia abajo
-                    canvas.drawLine(currentX, currentY, currentX, currentY + 100f, pathPaint)
+                    canvas.drawLine(currentX, currentY, currentX, currentY + pressDurationFactor, pathPaint)
                     arrowPath.reset()
-                    arrowPath.moveTo(currentX, currentY + 100f)
-                    arrowPath.lineTo(currentX - 10f, currentY + 80f)
-                    arrowPath.lineTo(currentX + 10f, currentY + 80f)
+                    arrowPath.moveTo(currentX, currentY + pressDurationFactor)
+                    arrowPath.lineTo(currentX - 10f, currentY + (pressDurationFactor - 20f))
+                    arrowPath.lineTo(currentX + 10f, currentY + (pressDurationFactor - 20f))
                     arrowPath.close()
                     canvas.drawPath(arrowPath, arrowPaint)
 
-                    currentY += 100f
+                    currentY += pressDurationFactor
                 }
                 "L" -> {
                     // Dibujar flecha hacia la izquierda
-                    canvas.drawLine(currentX, currentY, currentX - 100f, currentY, pathPaint)
+                    canvas.drawLine(currentX, currentY, currentX - pressDurationFactor, currentY, pathPaint)
                     arrowPath.reset()
-                    arrowPath.moveTo(currentX - 100f, currentY)
-                    arrowPath.lineTo(currentX - 80f, currentY - 10f)
-                    arrowPath.lineTo(currentX - 80f, currentY + 10f)
+                    arrowPath.moveTo(currentX - pressDurationFactor, currentY)
+                    arrowPath.lineTo(currentX - (pressDurationFactor - 20f), currentY - 10f)
+                    arrowPath.lineTo(currentX - (pressDurationFactor - 20f), currentY + 10f)
                     arrowPath.close()
                     canvas.drawPath(arrowPath, arrowPaint)
 
-                    currentX -= 100f
+                    currentX -= pressDurationFactor
                 }
                 "R" -> {
                     // Dibujar flecha hacia la derecha
-                    canvas.drawLine(currentX, currentY, currentX + 100f, currentY, pathPaint)
+                    canvas.drawLine(currentX, currentY, currentX + pressDurationFactor, currentY, pathPaint)
                     arrowPath.reset()
-                    arrowPath.moveTo(currentX + 100f, currentY)
-                    arrowPath.lineTo(currentX + 80f, currentY - 10f)
-                    arrowPath.lineTo(currentX + 80f, currentY + 10f)
+                    arrowPath.moveTo(currentX + pressDurationFactor, currentY)
+                    arrowPath.lineTo(currentX + (pressDurationFactor - 20f), currentY - 10f)
+                    arrowPath.lineTo(currentX + (pressDurationFactor - 20f), currentY + 10f)
                     arrowPath.close()
                     canvas.drawPath(arrowPath, arrowPaint)
 
-                    currentX += 100f
+                    currentX += pressDurationFactor
                 }
             }
         }
+
         canvas.restore()
     }
     override fun onTouchEvent(event: MotionEvent?): Boolean {
